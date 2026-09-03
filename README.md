@@ -76,7 +76,9 @@ Element-first: add a Sort dropdown. Interaction-first (rung 4): column headers a
 | [references/design-review-protocol.md](references/design-review-protocol.md) | Render-and-walk practice, the craft pass, inheriting a UI, the regression watchlist, design-system review, comply-or-argue, report format, convergence |
 | [references/craft-baseline.md](references/craft-baseline.md) | Measurable exit criteria (WCAG 2.2 AA, Apple HIG, Material Design) for elements that survived the ledger — judges quality only, can never add an element |
 | [references/ai-agent-interaction.md](references/ai-agent-interaction.md) | Horvitz's mixed-initiative principles, the Microsoft human-AI guidelines, Google PAIR, Nielsen's intent-based paradigm — mapped to reducing interface |
-| [tests/pressure-log.md](tests/pressure-log.md) | Scenario tests and outcomes verifying that the wording actually changes agent behavior |
+| [tests/scenarios.md](tests/scenarios.md) | Verbatim scenario prompts for both arms, expected shapes, and the not-yet-covered list — the re-runnable suite |
+| [tests/fixtures/](tests/fixtures/) | Fixture files the scenarios need (the two-round OpsQueue ledger) |
+| [tests/pressure-log.md](tests/pressure-log.md) | Outcomes from each run of the suite |
 | [CHANGELOG.md](CHANGELOG.md) | Version history |
 | [.claude-plugin/](.claude-plugin/) | Plugin and marketplace manifests for Claude Code installation |
 

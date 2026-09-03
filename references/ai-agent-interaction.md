@@ -43,6 +43,7 @@ Lookout (the testbed): reads an email, infers whether the user wants to schedule
 
 Saleema Amershi, Dan Weld, Mihaela Vorvoreanu, Adam Fourney, Besmira Nushi, Penny Collisson, Jina Suh, Shamsi Iqbal, Paul Bennett, Kori Inkpen, Jaime Teevan, Ruth Kikin-Gil, Eric Horvitz. Microsoft. CHI 2019 Honorable Mention.
 PDF: https://www.microsoft.com/en-us/research/wp-content/uploads/2019/01/Guidelines-for-Human-AI-Interaction-camera-ready.pdf
+DOI: https://doi.org/10.1145/3290605.3300233
 
 Synthesised from 168 recommendations across 20 years; validated by 49 practitioners against 20 products; 8 of the 18 map to Horvitz 1999. Each guideline is a verb phrase with no conjunctions so it can be checked as applied/violated in an interface.
 

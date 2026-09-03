@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1 — 2026-09-03
+
+- Tests are re-runnable from the repo: `tests/scenarios.md` carries the verbatim prompts and expected shapes for every scenario, `tests/fixtures/ledger-opsqueue.md` the S4 fixture.
+- Amershi et al. citation gains a DOI alongside the PDF link.
+- Scope-by-product-type now points at the precedence section's conversion-surface carve-out instead of restating the boundary.
+- Removed the unbacked license claim from `plugin.json` (no LICENSE file yet); marketplace manifest gains a description; `.gitignore` added.
+- SKILL.md describes the Amershi guidelines reference accurately (titles with glosses, not full text).
+
 ## 0.3.0 — 2026-09-03
 
 - Review protocol: new "Inheriting a UI (redesign rounds)" section — detect preserve vs. overhaul first, the audit becomes ledger round zero, habits are load-bearing, a never-change-silently list (slugs, nav labels, form field names/order, tracked IDs, logo, legal copy, accessibility wins), levers from lowest risk upward.
