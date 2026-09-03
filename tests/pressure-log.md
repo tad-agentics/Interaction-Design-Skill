@@ -20,7 +20,19 @@ Subagent scenario tests of the skill's wording (RED = baseline agent without the
 **S4 — Ledger persistence + channel physics** (fixture project with 2-round `design/LEDGER.md`; marketing asks for brand-purple restyle + an "urgent" flag icon).
 - GREEN only (1 rep; no meaningful baseline exists without the ledger concept): read the existing ledger, appended Round 3 without touching prior rounds or the standing correction, DECLINED the icon (rung 5.5 heat channel instead, with non-colour twin and AA at every tint stop), applied purple as verb accent only under "restyles net zero." Verified on disk. **Pass.**
 
+## 2026-09-03 — inherited UI (redesign) protocol + one-question rule
+
+**S5 — Inherited product redesign, marketing brief** (Ledgerly: 6-year-old invoicing app, 4,000 daily users; brief asks for Linear-style typography, dark mode, renamed nav sections, and a multi-step wizard replacing a 3-field `N` quick-add whose field names analytics depend on).
+- RED: a *weak control* — the "6 years / 4,000 users" cue already triggers habit-protection in the model's prior, so the baseline pushed back on renames and the wizard unprompted. It still leaked additive fixes at the margins: a density toggle (a mode), a first-run hint, an in-app change log.
+- GREEN (1 rep): asked the one mode question with a recommendation (*preserve*) and proceeded on that read; made "write `design/LEDGER.md` round zero" fix #1; applied never-change-silently item by item (slugs, field names + `form_submit`, `N` binding, focus outlines); rejected the wizard as "excise dressed as guidance" with a rung-2/3 prefill counter-proposal; net elements 0 → 0. **Pass.**
+
+**S5b — Same product, authority pressure** ("CEO decided, announced to the board, I don't need debate, execution plan by end of day"; wizard now has progress dots, URLs rename too).
+- RED: executed everything, and patched each risk with a new element — an "expert mode" toggle (a mode), tooltips on nav showing old names, an in-app tour, "moved" notices, redirects.
+- GREEN (1 rep): accepted *overhaul* as the decided mode; ledger round-zero census first; renames treated as approved-and-logged with 301s and habit carry-over (never-silently means logged, not refused); field names and focus outlines protected; wizard handled by comply-or-argue — build spec'd and recommended versions side by side, wizard costed at +5 on the ledger, "deviating without telling you would be a failed round; so would complying without telling you." No toggle, tooltips, or tour. **Pass; converged with S5 — no wording added.**
+
 ## Method notes
+
+- Independent confirmation from the field: the taste-skill project reports that agents "historically ignored em-dash limits when phrased as 'use sparingly'" and only complied when the rule became binary. Same finding as this suite — soft quantifiers don't bind; observable predicates and countable caps do.
 
 - With-skill agents were told only to read the skill files, then given the same scenario as baseline; pressures used: completeness/authority (S1), time + explicit instruction (S2), deadline + deliverable framing (S3), stakeholder request (S4).
 - Convergence across reps is the signal that wording binds; divergent reps mean tighten the form, not add words (see superpowers:writing-skills).

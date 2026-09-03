@@ -29,14 +29,26 @@ It triggers on any UI creation, modification, review, or prototyping task — in
 
 ## Pressure-tested
 
-The load-bearing wording is verified the way code is: baseline subagents run each scenario *without* the skill to document the failure (tooltips and CTAs added to score review points, a confirmation dialog shipped on a reversible delete, a style system generated before any interaction thinking), then agents reading the skill run the same scenario under the same pressure. Current suite: a completeness-pressured design review, a "ship the confirm dialog today" instruction, a style-first deliverable request (three converged reps), and a ledger-persistence fixture with a badge-shaped stakeholder request. All with-skill runs pass; scenarios and outcomes live in [tests/pressure-log.md](tests/pressure-log.md), and edits to the precedence, craft-scoping, confirm-vs-undo, or ledger rules should re-run that suite.
+The load-bearing wording is verified the way code is: baseline subagents run each scenario *without* the skill to document the failure (tooltips and CTAs added to score review points, a confirmation dialog shipped on a reversible delete, a style system generated before any interaction thinking), then agents reading the skill run the same scenario under the same pressure. Current suite: a completeness-pressured design review, a "ship the confirm dialog today" instruction, a style-first deliverable request (three converged reps), a ledger-persistence fixture with a badge-shaped stakeholder request, and an inherited-product redesign run twice — once on a marketing brief, once under "the CEO already decided" authority pressure. All with-skill runs pass; scenarios and outcomes live in [tests/pressure-log.md](tests/pressure-log.md), and edits to the precedence, craft-scoping, confirm-vs-undo, or ledger rules should re-run that suite.
+
+The review protocol also covers **inheriting an existing UI**: detect preserve-vs-overhaul before any design work, take the audit as ledger round zero, treat habits as load-bearing, and never silently change slugs, nav labels, form field names, tracked IDs, the logo, legal copy, or existing accessibility wins.
 
 ## Installation
 
-Copy or symlink this directory into your Claude Code skills location:
+**As a Claude Code plugin** (from the marketplace manifest in this repo):
+
+```bash
+claude plugin marketplace add tad-agentics/Interaction-Design-Skill
+```
+
+```bash
+claude plugin install interaction-first-design@interaction-first-design
+```
+
+**Or copy the skill directly** into your skills location:
 
 ```bash
 cp -R interaction-first-design ~/.claude/skills/interaction-first-design
 ```
 
-Claude will invoke it automatically on matching tasks, or you can invoke it explicitly with `/interaction-first-design`.
+Claude will invoke it automatically on matching tasks, or you can invoke it explicitly with `/interaction-first-design`. See [CHANGELOG.md](CHANGELOG.md) for version history.

@@ -5,12 +5,13 @@ How to review screens, prototypes, and design systems — your own or a design a
 Contents
 1. Render and walk — never review from the notes
 2. The craft pass
-3. The regression watchlist
-4. Reviewing a design system document
-5. Self-limiting system rules
-6. Working with a design agent: comply-or-argue
-7. Review output format
-8. Convergence: when to stop designing
+3. Inheriting a UI (redesign rounds)
+4. The regression watchlist
+5. Reviewing a design system document
+6. Self-limiting system rules
+7. Working with a design agent: comply-or-argue
+8. Review output format
+9. Convergence: when to stop designing
 
 ---
 
@@ -34,7 +35,17 @@ After the walk, run `craft-baseline.md` over the elements that survive the ladde
 
 Scope discipline: the craft pass judges **quality of existing elements only**. If a craft check appears to demand a new element ("this needs a tooltip / badge / empty-state block"), it is not a craft finding — write it up as a ladder question (which rung actually closes this gulf?) and say so in the report. A review that scores points by adding elements has inverted the skill.
 
-## 3. The regression watchlist
+## 3. Inheriting a UI (redesign rounds)
+
+When the artifact is an existing product or site someone else built and users already rely on, round zero changes shape. Misclassifying the engagement is the biggest source of bad redesign work, so settle these before proposing anything:
+
+- **Detect the mode first.** *Preserve* (modernise without breaking brand or habits) or *overhaul* (new visual language over existing content and IA). If the brief doesn't say which, ask that one question, with the two choices — before any design work.
+- **The audit is ledger round zero.** Walk the existing artifact (Section 1) and take the census: every element with its rung and cost, the channel map as it currently stands, brand tokens (colors, type, radii, logo treatment), information architecture (page tree, slugs, primary nav, conversion paths), patterns that carry user habits, patterns to retire. Write that census into `design/LEDGER.md` as round zero. Existing elements are prior decisions to argue with, not a blank slate.
+- **Habits are load-bearing.** On inherited UI the thousandth use is already happening: muscle-memory positions, keyboard shortcuts, nav labels, field order. A removal still scores −1 on the ledger, but its entry must name the habit it disturbs and how users are carried across (same position, same keystroke, a transition period).
+- **Never change silently**: URL structure and slugs; primary nav labels; form field names and order (analytics and autofill depend on them); element IDs and events that tracking fires on; the logo or wordmark; legal, consent, and cookie copy; and existing accessibility wins — focus states, alt text, keyboard paths, and contrast never regress in a restyle. Each of these moves only with explicit approval, logged in the ledger.
+- **Stop when the brief is satisfied.** Work the levers from lowest risk upward — typography, spacing and rhythm, color recalibration onto the existing brand accent, then motion, then structural recomposition — and prefer targeted evolution over full redesign whenever IA and content are sound.
+
+## 4. The regression watchlist
 
 Discipline decays in predictable ways. Check for each by name, every round:
 
@@ -47,8 +58,9 @@ Discipline decays in predictable ways. Check for each by name, every round:
 - **The page replacement.** Under complexity pressure, panels regress to full-page views with back-links, and the object's verb disappears in the new view. Re-verify the panel rule and verb sovereignty on every new surface.
 - **The armed look that isn't armed.** A filled/primary-styled control that doesn't commit in one gesture in *this* context (but does elsewhere) is a mode. Same look = same behaviour, every surface.
 - **Meaning drift between channels.** A colour reserved for one channel (e.g. urgency) reused for links, branding, or focus. Each colour family belongs to one channel; check new elements against the channel map.
+- **Generator tells.** Elements that arrive from the model's priors rather than from any design decision: decorative status dots, micro-label eyebrows and section numbering, ornamental separators, fake-precise numbers and placeholder names in fixtures, fake product UI built from styled divs. They enter builds unbidden and undeclared — check them against the ledger like any addition, and check fixtures stay realistic and pinned.
 
-## 4. Reviewing a design system document
+## 5. Reviewing a design system document
 
 A design system is reviewed as an *operating constitution*, not a style sheet:
 
@@ -61,7 +73,7 @@ A design system is reviewed as an *operating constitution*, not a style sheet:
 - Check **platform/module boundaries**: the system defines what an extension may add (vocabulary: verbs, fields, labels, translations, layouts within its own surface) and what it may never add (channels, tiers, tokens, primitives, motions, keystrokes, commit controls, exemptions). A module needing a new primitive is a platform change request, argued centrally, with something retired in exchange.
 - Check **document governance**: the system files as an edit/version of the canonical design doc, not a new parallel document; superseded material is archived, not left ambient.
 
-## 5. Self-limiting system rules
+## 6. Self-limiting system rules
 
 The strongest systems constrain their own future. Look for (and add, if missing):
 
@@ -71,7 +83,7 @@ The strongest systems constrain their own future. Look for (and add, if missing)
 - **One meaning per channel, one channel per meaning** — and any surface may redefine at most one declared channel (e.g. a module's layout redefines what position means on its own canvas) while all others keep their platform meaning.
 - **Additions retire something.** Platform-level additions in particular: the shell only grows by exchange.
 
-## 6. Working with a design agent: comply-or-argue
+## 7. Working with a design agent: comply-or-argue
 
 The best agent rounds are not the most obedient ones. Set the expectation explicitly, and review for it:
 
@@ -81,7 +93,7 @@ The best agent rounds are not the most obedient ones. Set the expectation explic
 - **The reviewer can be wrong.** When the agent's argument beats the instruction (e.g. a motion rule that violates "nothing moves unless the world changed"), the review says so and the doctrine updates. Ratify good unsolicited changes explicitly — an unratified improvement is a landmine for the next round.
 - **Ratify or reject every structural change, by name.** Silent structural changes that survive a round become de-facto doctrine without ever being argued.
 
-## 7. Review output format
+## 8. Review output format
 
 Lead with the verdict, in one sentence: **Ship / Ship with fixes / Needs work**, plus whether the round converged or drifted, and which viewports were walked. Then:
 
@@ -93,7 +105,7 @@ Lead with the verdict, in one sentence: **Ship / Ship with fixes / Needs work**,
 
 The biggest removal leads; never a laundry list with the lede buried.
 
-## 8. Convergence: when to stop designing
+## 9. Convergence: when to stop designing
 
 Watch net element delta per round and the ratio of new-structure to polish. The design has converged when a round completes remaining interactions while adding essentially nothing, and fixes are cosmetic. At that point:
 

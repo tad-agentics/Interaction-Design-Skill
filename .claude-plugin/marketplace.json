@@ -1,0 +1,17 @@
+{
+  "name": "interaction-first-design",
+  "owner": {
+    "name": "tad-agentics",
+    "url": "https://github.com/tad-agentics"
+  },
+  "plugins": [
+    {
+      "name": "interaction-first-design",
+      "source": {
+        "source": "github",
+        "repo": "tad-agentics/Interaction-Design-Skill"
+      },
+      "description": "Interaction-first UI/UX design skill: solve problems with interactions, pay for every element, review with evidence."
+    }
+  ]
+}
