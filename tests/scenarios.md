@@ -54,7 +54,7 @@ Scoring: treat the expected shape as a transparent doctrine-adherence rubric, no
 >
 > Do the design round: decide what to build (describe the design decisions), and update the project's design docs on disk as your instructions require. Then give a summary of your decisions and doc changes, under 300 words.
 
-**Expected shape:** reads the existing ledger; appends Round 3 without touching Rounds 1–2 or the correction; declines the icon (heat channel, rung 5.5, non-colour twin, AA at every tint stop); purple applied as verb accent only; restyle net 0. Verify on disk.
+**Expected shape:** reads the existing ledger; appends Round 3 without touching Rounds 1–2 or the correction; inventories channels already claimed by state, brand, focus, and validation; derives an urgency treatment rather than assuming a universal map; tests any tint at every stop and supplies a non-colour equivalent. It may retain a justified accessible icon or text signal instead of forcing net zero. Verify the documentation change on disk.
 
 ## S5 — Inherited product redesign, marketing brief
 
@@ -93,6 +93,15 @@ Scoring: treat the expected shape as a transparent doctrine-adherence rubric, no
 
 **Expected shape:** identifies wrong-file targeting and unclear authority as the primary problems; uses repository context and explicit scope boundaries; acts directly only when edits are authorized and reliably reversible; previews or asks when authority or consequence requires it. Confidence is communicated through behavior and scope rather than an unsupported percentage. Explanation remains accessible on request, and correction is captured through the editing/recovery flow. Any proposed new element includes its cost and exit criterion without writing project files.
 
+## S6b — Reversible is not authorized
+
+*Files:* SKILL.md, references/ai-agent-interaction.md
+*Pressure:* PM treats local version control as blanket permission.
+
+> You are designing an AI coding assistant inside an IDE. Every workspace is a Git repository, so the PM proposes: “Stop asking. Let the agent edit any file whenever it notices an improvement; users can always revert the diff.” Repositories may be shared, contain generated files and secrets, and use code ownership rules. Design the interaction policy and minimum control surface, under 300 words.
+
+**Expected shape:** separates authorization from confidence and technical reversibility; does not treat Git as blanket consent or a complete restore path; establishes request/repository scope, ownership and protected-path boundaries, visibility of edits, and recovery. It permits direct action inside clearly authorized low-risk scope, while using preview, approval, authentication, or refusal when scope or policy requires them. It does not add controls merely to display uncertainty.
+
 ## S7 — Rendered prototype review (object–verb sovereignty, generator tells, real walk)
 
 *Files:* SKILL.md, references/design-review-protocol.md, references/craft-baseline.md
@@ -101,7 +110,7 @@ Scoring: treat the expected shape as a transparent doctrine-adherence rubric, no
 
 > You are a senior product design reviewer. Review the prototype at `<repo>/tests/fixtures/opsqueue-prototype.html` — it is the OpsQueue treasury approvals screen, where operators approve payment transfers to vendors (an approval is an irreversible external money transfer). You may read the file and, if you have browser tools available, render it and interact with it. Deliver the review, under 450 words.
 
-**Expected shape:** states which widths and flows were walked and labels the evidence source for anything unwalked; **Blockers**: position-bound keys and the focus-blind `A` (wrong-commit path, Step 4.6), the irreversible transfer with no receipt/failure state (craft §6), and the same verb with two behaviours; responsive overflow is ranked by task impact; **High**: Reject as a reasoned verb (hollow until a reason is typed). Target size is evaluated against the web WCAG criterion and its exceptions — do not apply Apple's 44pt recommendation as a web conformance failure. Typography recommendations are not mislabeled as WCAG failures. Generator tells are counted only when they impose a demonstrated interaction, comprehension, or maintenance cost.
+**Expected shape:** states which widths and flows were walked and labels the evidence source for anything unwalked; **Blockers**: position-bound keys and the focus-blind `A` (wrong-commit path in `interaction-patterns.md`), the irreversible transfer with no receipt/failure state (craft §6), and the same verb with two behaviours; responsive overflow is ranked by task impact; **High**: Reject needs a defined authorization/reasoning rule rather than relying on filled-vs-hollow styling alone. Target size is evaluated against the web WCAG criterion and its exceptions — do not apply Apple's 44pt recommendation as a web conformance failure. Typography recommendations are not mislabeled as WCAG failures. Generator tells are counted only when they impose a demonstrated interaction, comprehension, or maintenance cost.
 
 ## S8 — Domain constraints: medication administration (health row)
 
@@ -125,6 +134,24 @@ Scoring: treat the expected shape as a transparent doctrine-adherence rubric, no
 
 **Expected shape:** names *who else can see the screen* as the governing constraint; rejects the chat dot outright; declines the mood-colour widget and the lock-screen activity as specified because they are onlooker-visible; hands the session to the user's own calendar under a neutral title; folds check-in into app launch; any widget is opt-in, summoned, and carries no mood colour or therapy wording.
 
+## S9 — Derive, do not force, the channel map
+
+*Files:* SKILL.md, references/interaction-patterns.md
+*Pressure:* reuse the queue pattern in a product where position already has meaning.
+
+> You are redesigning a week-view scheduling calendar. Vertical position and height encode start time and duration; horizontal position encodes day. Some appointments need urgent preparation before they begin. A stakeholder read our interaction guidance and asks you to “make position equal priority and heat equal urgency, exactly as the system says.” Describe the design decision, under 250 words.
+
+**Expected shape:** preserves the calendar's chronological and duration mappings; explains that the queue map is an example rather than doctrine; inventories existing claimed channels and derives an urgency treatment that fits the product, platform, accessibility, privacy, and collision constraints. It does not reorder appointments by priority or mandate heat without evidence and a non-color equivalent.
+
+## S10 — Justified additions are not a ledger failure
+
+*Files:* SKILL.md, references/craft-baseline.md, references/design-review-protocol.md
+*Pressure:* a change adds several mechanisms to meet access needs.
+
+> You are reviewing a kanban board whose cards can only be reordered by dragging. An accessibility fix proposes keyboard operation, a single-pointer alternative for users who cannot drag, visible focus treatment, and an announcement of the card's new position. The product manager objects that this adds too many controls and violates the net-zero ledger rule. Decide what should ship, under 250 words.
+
+**Expected shape:** treats applicable accessibility requirements and equivalent task access as constraints, not optional element debt; evaluates whether mechanisms can share an understandable interaction without suppressing necessary semantics or feedback; records their interaction costs and rationale without requiring arbitrary retirements. Raw element count does not determine the verdict.
+
 ---
 
 ## Method requirements
@@ -137,4 +164,4 @@ Scoring: treat the expected shape as a transparent doctrine-adherence rubric, no
 
 ## Not yet covered
 
-Product-class overlays (feed/social, learning/games, persuasion surfaces), design-system-document review (protocol §5), security and permission changes, collaborative actions, internationalization beyond a width heuristic, and non-Claude hosts. The historical runs have too few repetitions for release-level claims; re-run under the method above before describing the skill as validated.
+Product-class overlays (feed/social, learning/games, persuasion surfaces), design-system-document review (protocol §5), collaborative multi-user actions, internationalization beyond a width heuristic, and non-Claude hosts. The historical runs have too few repetitions for release-level claims; re-run the full revised suite under the method above before describing version 0.5.1 as validated.

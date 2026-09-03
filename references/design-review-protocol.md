@@ -1,11 +1,12 @@
 # Design review protocol — auditing design work across rounds
 
-How to review screens, prototypes, and design systems — your own or a design agent's — so that discipline survives iteration. Distilled from multi-round agent-driven design practice. Use alongside SKILL.md's ladder and ledger; this file covers what happens *between* rounds.
+How to review screens, prototypes, and design systems—your own or a design agent's—so that discipline survives iteration. Use alongside SKILL.md's ladder and interaction-cost accounting; this file covers evidence, ledgers, and what happens between rounds.
 
 Contents
 1. Render and walk — never review from the notes
 2. The craft pass
 3. Inheriting a UI (redesign rounds)
+3.5 Element ledger and interaction-cost accounting
 4. The regression watchlist
 5. Reviewing a design system document
 6. Self-limiting system rules
@@ -40,37 +41,53 @@ Scope discipline: the craft pass judges **quality of existing elements only**. I
 When the artifact is an existing product or site someone else built and users already rely on, round zero changes shape. Misclassifying the engagement is the biggest source of bad redesign work, so settle these before proposing anything:
 
 - **Detect the mode first.** *Preserve* (modernise without breaking brand or habits) or *overhaul* (new visual language over existing content and IA). If the brief does not establish the mode and the difference would materially change the result, ask a focused question before changing the design.
-- **The audit can become ledger round zero.** Walk the existing artifact (Section 1) and take the census: every relevant element with its rung and cost, the channel map as it currently stands, brand tokens (colors, type, radii, logo treatment), information architecture (page tree, slugs, primary nav, conversion paths), patterns that carry user habits, patterns to retire. In review-only work, report the census without writing files. Persist it to `design/LEDGER.md` only when the user requests documentation, the repository already uses the ledger, or implementation has been authorized.
-- **Habits are load-bearing.** On inherited UI the thousandth use is already happening: muscle-memory positions, keyboard shortcuts, nav labels, field order. A removal still scores −1 on the ledger, but its entry must name the habit it disturbs and how users are carried across (same position, same keystroke, a transition period).
+- **The audit can become ledger round zero.** Walk the existing artifact (Section 1) and take a task-relevant census: elements and signals with their rungs and costs, the channel map as it currently stands, brand tokens, information architecture, patterns that carry user habits, and patterns proposed for retirement. In review-only work, report the census without writing files. Persist it to `design/LEDGER.md` only when the user requests documentation, the repository already uses the ledger, or implementation has been authorized.
+- **Habits are load-bearing.** On inherited UI the thousandth use is already happening: muscle-memory positions, keyboard shortcuts, nav labels, and field order. A removal must name the habit it disturbs and how users are carried across, not merely score −1.
 - **Never change silently**: URL structure and slugs; primary nav labels; form field names and order (analytics and autofill depend on them); element IDs and events that tracking fires on; the logo or wordmark; legal, consent, and cookie copy; and existing accessibility wins — focus states, alt text, keyboard paths, and contrast never regress in a restyle. Each of these moves only with explicit approval, logged in the ledger.
 - **Stop when the brief is satisfied.** Work the levers from lowest risk upward — typography, spacing and rhythm, color recalibration onto the existing brand accent, then motion, then structural recomposition — and prefer targeted evolution over full redesign whenever IA and content are sound.
+
+### 3.5 Element ledger and interaction-cost accounting
+
+Use a ledger only when the project already has one, the user requests one, or authorized implementation includes ongoing design governance. Reviews report proposed entries without writing files.
+
+```text
+CHANGE: <element, signal, step, or state>
+Closes gulf: execution | evaluation
+Why this rung fits: <lower-cost alternatives considered>
+Who encounters it, when: <audience + condition>
+Costs: attention | motor | learning | layout | state | copy | a11y | privacy | maintenance
+Replaces or removes: <items, steps, or "none">
+Exit criteria: <what would let the project remove or simplify it later>
+```
+
+Record additions, removals, and corrections in place so later rounds can audit the reasoning. Raw element delta is a diagnostic, not the objective: a visible addition may lower total task cost or be required for accessibility, safety, law, permissions, or a new capability. Do not require every addition to retire something else. For a restyle, reject unrelated functional additions; retain justified semantic and accessible mechanisms.
 
 ## 4. The regression watchlist
 
 Discipline decays in predictable ways. Check for each by name, every round:
 
-- **Decoration creep.** Icons, glyphs, chips, plates, and hint lines arrive undeclared, usually during restyles or platform-layer work. Any element not in the ledger is either removed or declared — "small" is not a category.
+- **Decoration creep.** Icons, glyphs, chips, plates, and hint lines arrive without a task rationale, usually during restyles or platform-layer work. Evaluate undeclared additions against the ladder and interaction costs; remove or record them according to the evidence.
 - **Banned patterns returning under new names.** A deleted bell comes back as "Notifications"; a deleted badge count comes back as a nav counter; a deleted confirmation comes back as an "are you sure" panel. Audit *functions*, not names: does anything re-create a checking loop, a second commit path, an interruption channel?
 - **Chrome grows fastest at the shell.** Discipline won at the feature level leaks at the platform level (sidebars, global nav, counters), where every addition is multiplied across all future modules. The shell is a frame; it carries a ledger like any frame.
 - **Buyer copy on operator screens.** Prose explaining the product's philosophy or roadmap ("the first of several… workflows mount here") belongs in the pitch deck. If a sentence addresses someone who is not the screen's user, cut it.
-- **Two sentences for one object.** The same verb or object described differently in collapsed vs expanded vs remote surfaces. One object, one sentence.
+- **Meaning drift for one object.** The same action has different authority, target, or consequence across collapsed, expanded, or remote surfaces. Wording may adapt to locale and context while preserving meaning.
 - **Fixture drift.** Personas, names, IDs, and sample data silently changing between rounds. Fixtures are test data pinned to a source of truth; renames are diffs to reject.
 - **The page replacement.** Under complexity pressure, panels regress to full-page views with back-links, and the object's verb disappears in the new view. Re-verify the panel rule and verb sovereignty on every new surface.
-- **The armed look that isn't armed.** A filled/primary-styled control that doesn't commit in one gesture in *this* context (but does elsewhere) is a mode. Same look = same behaviour, every surface.
-- **Meaning drift between channels.** A colour reserved for one channel (e.g. urgency) reused for links, branding, or focus. Each colour family belongs to one channel; check new elements against the channel map.
+- **The misleading action state.** Identical styling implies different readiness or consequences across surfaces. Judge this against the product's established component semantics rather than assuming filled always means immediate commit.
+- **Meaning drift between channels.** A channel with an established semantic meaning in this product is reused incompatibly for links, branding, focus, or another state. Check additions against the derived channel map and preserve required redundant cues.
 - **Generator tells.** Elements that arrive from the model's priors rather than from any design decision: decorative status dots, micro-label eyebrows and section numbering, ornamental separators, fake-precise numbers and placeholder names in fixtures, fake product UI built from styled divs. They enter builds unbidden and undeclared — check them against the ledger like any addition, and check fixtures stay realistic and pinned.
 
 ## 5. Reviewing a design system document
 
 A design system is reviewed as an *operating constitution*, not a style sheet:
 
-- Every rule must state a **meaning** ("glow = attention") plus a **never** ("never focus, never hover, never two at once"). A rule without a never is a preference and will be renegotiated.
+- Semantic rules should state their **meaning**, scope, and important boundaries. Use a categorical “never” only for a real invariant; recommendations and defaults should identify when exceptions are appropriate.
 - Hunt **internal contradictions**: a token contradicting a judgement call recorded earlier in the same document; a motion section banning loops while the loading section specs a shimmer. Documents written across rounds accumulate these.
 - Hunt **wrong-commit paths** as P0: any key or gesture that can act on something other than what the user is looking at (e.g. a global commit key bound to a highlighted object while focus is elsewhere); any list that re-sorts under the user's hands; any commit whose failure has no defined state (a "no toasts" rule without a failed-commit rule = silent failure).
 - Check **the failure path exists** for every irreversible action: what the user sees when the backend rejects the commit, when the network drops, when permission is denied. "The success animation is the receipt" requires "the receipt waits for acknowledgement."
 - Check **density and scale limits** have answers, not just bans ("no compact mode" must be accompanied by what a 10× queue does).
 - Check **claims against arithmetic**: contrast ratios at the strongest tint (measure at the tinted edge, not the white centre), type sizes against the declared floor, expansion room for the second language (Vietnamese ≈ +15–25% and taller diacritics).
-- Check **platform/module boundaries**: the system defines what an extension may add (vocabulary: verbs, fields, labels, translations, layouts within its own surface) and what it may never add (channels, tiers, tokens, primitives, motions, keystrokes, commit controls, exemptions). A module needing a new primitive is a platform change request, argued centrally, with something retired in exchange.
+- Check **platform/module boundaries**: the system defines what an extension may add locally and what requires a platform-level decision. A module needing a new primitive makes that request centrally with evidence, migration impact, and interaction costs; retirement of an older primitive is useful when warranted, not mandatory.
 - Check **document governance**: the system files as an edit/version of the canonical design doc, not a new parallel document; superseded material is archived, not left ambient.
 
 ## 6. Self-limiting system rules
@@ -78,10 +95,10 @@ A design system is reviewed as an *operating constitution*, not a style sheet:
 The strongest systems constrain their own future. Look for these controls and recommend them when the review evidence justifies them; add them only when edits are in scope:
 
 - **Banned list and retired list**, with "do not reintroduce" — the retired list is the memory that stops patterns returning under new names.
-- **Exemption budget**: no new exemption without retiring one. Exemptions are where systems rot.
+- **Exemption governance**: require a named rationale, owner, scope, and review point. Remove obsolete exemptions rather than imposing an arbitrary one-in/one-out quota.
 - **"A number rendered because it was available" is banned** — data must earn rendering by serving a decision.
-- **One meaning per channel, one channel per meaning** — and any surface may redefine at most one declared channel (e.g. a module's layout redefines what position means on its own canvas) while all others keep their platform meaning.
-- **Additions retire something.** Platform-level additions in particular: the shell only grows by exchange.
+- **Avoid conflicting channel meanings within one context.** Allow redundant cues where they improve accessibility or recognition, and document deliberate local remaps.
+- **Platform additions carry multiplied cost.** Require evidence and an exit criterion for shell-level growth; do not require retirement when the addition is otherwise justified.
 
 ## 7. Working with a design agent: comply-or-argue
 
@@ -101,13 +118,13 @@ Lead with the verdict, in one sentence: **Ship / Ship with fixes / Needs work**,
 2. **Violations / regressions** — each written as *observation → applicable requirement or principle → impact → fix*, with its evidence source (render, interaction, accessibility tree, source, measured value, or console). Rank by user and release impact: **Blocker** (unsafe wrong-commit paths, data loss, critical task failure, or a confirmed release-gating legal/accessibility failure), **High** (material task or access failure to fix before merge), **Medium** (meaningful improvement or limited failure), **Nit** (preference or polish, never gates). A disagreement with this skill's doctrine is not itself a blocker.
 3. **Decisions for the human** — genuine trade-offs (axis purity vs control constancy, etc.) stated as a choice with a recommendation, not silently resolved.
 4. **The fix block** — a numbered, copy-paste instruction for the next round: fixes first, then new work, then what to deliver as proof. Keep ordered items checkable; next round begins by checking them.
-5. **Net element count** for the round.
+5. **Element changes and net interaction cost** for the round. Include raw count only as supporting evidence.
 
 The biggest removal leads; never a laundry list with the lede buried.
 
 ## 9. Convergence: when to stop designing
 
-Watch net element delta per round and the ratio of new-structure to polish. The design has converged when a round completes remaining interactions while adding essentially nothing, and fixes are cosmetic. At that point:
+Watch whether the task model and action semantics stabilize, whether remaining findings are lower-impact, and whether new structure still earns its interaction cost. The design has converged when material flows are complete and further rounds would mostly polish rather than change behavior. At that point:
 
 - Freeze as a version of the canonical design doc (edit, not new document).
 - The frame notes / interaction specs *are* the acceptance criteria — hand them to implementation with minimal rewriting, and audit implementation against the specs' behavioural sentences ("the verb is the progress bar"), not pixel measurements.

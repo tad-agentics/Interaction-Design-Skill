@@ -1,6 +1,6 @@
 # Worked examples — request → element-first response → interaction-first response
 
-Read when you want to see the ladder applied to a concrete request, or to calibrate a review against a known-good answer. Each example names the rung chosen and the net element count.
+Read when you want to see the ladder applied to a concrete request. These are examples, not universal answers; product evidence and constraints may change the rung. Each notes element changes as supporting evidence alongside the interaction decision.
 
 **"Users can't find how to sort the table."**
 Element-first: add a Sort dropdown above the table.
@@ -12,7 +12,7 @@ Interaction-first (rung 3): autosave on every change; peripheral "saved" tick th
 
 **"The AI sometimes picks the wrong file — add an approval step."**
 Element-first: modal listing the file with Approve/Reject.
-Interaction-first (rung 3 + G10): if confidence is high, act and show a one-line inline note with undo; if low, open the file picker pre-filtered to the top candidates with the best one focused — the user's confirming action is the selection itself. Elements added: none persistent. Removed: modal.
+Interaction-first (rungs 3–5 + G10): first establish which files the user authorized the agent to edit. Inside clear low-risk scope, act and show the diff with genuine undo; when authority or target is unclear, open the file picker pre-filtered to candidates so selection establishes the target. Use preview or approval for protected paths, shared work, or effects the restore path cannot cover. Element change depends on the existing IDE controls.
 
 **"New users don't know what to do on the empty dashboard — add three CTA cards and a tour."**
 Element-first: cards + coach marks.
@@ -24,7 +24,7 @@ Interaction-first (calm): distinguish by foghorn test. Only action-required even
 
 **"Add a settings page so users can configure the agent."**
 Element-first: settings page with 12 toggles.
-Interaction-first (Amershi G17 + rung 2): the agent learns from corrections (G13); global controls reduce to on/off and scope (what it may touch). Preferences the user never changes are excise. Elements added: two controls. Removed: ten.
+Interaction-first (Amershi G17 + rung 2): let the agent learn low-risk preferences from corrections, while retaining understandable controls for distinct permissions, data use, and consequences. Consolidate redundant toggles, but do not force every product into one global on/off. Element change follows the actual permission model.
 
 **"Users keep accidentally deleting tasks — add a confirmation dialog."** (from the pressure suite)
 Element-first: `alertdialog` with Cancel / Delete.
@@ -32,4 +32,4 @@ Interaction-first (rung 3, craft §6): soft-delete; row leaves immediately; peri
 
 **"Brand refresh: restyle the cards in brand purple and add an 'urgent' flag icon on near-deadline cards."** (from the pressure suite)
 Element-first: purple card backgrounds + a flag glyph.
-Interaction-first (rung 5.5): urgency is the heat channel — the card tint warms as a continuous function of time remaining, deadline text darkens as its non-colour twin; purple goes on the committable verb and focus ring only, never on state-carrying surfaces. Elements added: none. Restyle net zero; declined element logged in the ledger with its reasoning.
+Interaction-first (rungs 5.5–6): inventory channels already claimed by state, brand, focus, and validation. If an unclaimed continuous tint fits urgency and tests well, pair it with readable deadline text; otherwise retain a compact textual or icon signal with an accessible name. Apply purple where it does not collide with those meanings. Record the chosen signal and its costs; zero new elements is not a success criterion by itself.

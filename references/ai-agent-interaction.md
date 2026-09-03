@@ -37,7 +37,7 @@ The decision model: for each possible action, compare expected utility of **acti
 
 Lookout (the testbed): reads an email, infers whether the user wants to schedule. High confidence → opens a pre-filled appointment. Low confidence → opens the *right week* of the calendar rather than guessing a time — the user finishes with one direct-manipulation step. Very low → does nothing; a tray icon lets the user invoke manually. "Even when Lookout guesses incorrectly, the user is placed in an approximately correct position." If it asks and the user ignores it, it waits proportionally to its confidence, then "makes a respectful, apologetic gesture and evaporates."
 
-**Interface implication:** the act/ask/wait model replaces approval dialogs, confidence badges, and plan viewers with one mechanism: scope the action to the confidence, show the result in place, make refinement direct.
+**Interface implication:** the act/ask/wait model can reduce redundant approval dialogs, confidence badges, and plan viewers by matching scope to confidence and making refinement direct. It does not replace controls required for authority, safety, policy, collaboration, or consequences outside the product's restore path.
 
 ## 2. Amershi et al. — Guidelines for Human-AI Interaction (CHI 2019)
 
@@ -85,12 +85,12 @@ Study findings that matter for design: G1, G4, G12 are widely implemented; G2, G
 | G7 | A prominent "Ask AI" button everywhere | Selection + one keystroke; the trigger is the object |
 | G8 | Close buttons on suggestions | Ignoring *is* dismissal; nothing blocks |
 | G9 | Regenerate / reject / retry buttons | Edit the result directly; the edit is the correction |
-| G10 | Confirmation dialog | Scoped action (do the certain part, position the rest) |
+| G10 | Confirmation used only to compensate for uncertainty | Scoped action (do the certain part, position the rest); retain review where authority or consequence requires it |
 | G11 | "Why?" panel always open | "Why" available on request, near the result |
 | G14 | — | Don't re-layout what the user is looking at |
 | G15 | Thumbs up/down on every message | The correction is the feedback; explicit rating only where correction is impossible |
 | G16 | Explainer toast after every action | One inline note the first time; then silent |
-| G17 | Settings page with many toggles | On/off + scope; everything else learned (G13) |
+| G17 | Settings page with undifferentiated toggles | Start with understandable scope controls; add controls required by distinct permissions, risks, or user goals |
 
 ## 3. Google PAIR — People + AI Guidebook (2019→)
 
@@ -129,10 +129,10 @@ Run this at each place the agent could act:
 2. **Cost of being wrong?** Reversible in one gesture = low. Destructive, external side-effect, or expensive to notice = high.
 3. **User's attention?** Mid-flow = raise the bar for interruption; idle or waiting = lower it.
 4. Choose:
-   - High confidence, low cost → **act**, show the result in place, undo available.
-   - Medium confidence, low cost → **act on the certain subset**, position the rest for direct completion (Lookout: open the right week).
-   - Any confidence, high cost, reversible by design possible → **make it reversible, then act**.
-   - Low confidence, high cost, not reversible → **ask the minimum needed to establish intent and authority**; offer choices when the valid options are known and use an open question when inventing options would be unsafe.
+   - Clear authority, high confidence, low cost → **act**, show the result in place, undo available.
+   - Clear authority, medium confidence, low cost → **act on the certain subset**, position the rest for direct completion (Lookout: open the right week).
+   - High cost with a genuine restore path → establish authority first, then **make it reversible** and choose act, preview, or review according to policy and consequence.
+   - Unclear authority, low confidence, high cost, or no reliable restore path → **ask the minimum needed to establish intent and authority**; offer choices when the valid options are known and use an open question when inventing options would be unsafe.
    - Low confidence, low value, user busy → **wait**; leave a peripheral affordance for manual invocation.
 5. After the user corrects: apply G16 once (show the consequence), G13 (learn), G14 (don't disrupt).
 
@@ -145,6 +145,6 @@ For many low- and medium-risk AI features, start with this control surface and a
 - **Correct** (G9) — edit the output in place. The edit is the feedback (G15) and the learning signal (G13).
 - **Undo** — one easy gesture for effects the product can genuinely and reliably restore; use preview, approval, or a scoped action for effects it cannot.
 - **Why** (G11) — on request, near the output.
-- **Scope** (G17) — one global control over what the agent may touch; one on/off.
+- **Scope** (G17) — the smallest understandable control set that matches distinct permissions and consequences; not necessarily one global on/off.
 
 If a design needs more than these six, check whether the action should instead be scoped down (G10), made reversible, or protected by an authority/safety boundary. Keep additional controls when that review identifies a concrete need.

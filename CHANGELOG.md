@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.1 — 2026-09-03
+
+- Made authorization an independent gate for agent actions and aligned the main skill with the AI reference: reversibility alone no longer removes the need for preview, approval, authentication, audit, collaboration, or policy controls.
+- Replaced universal queue-style channel assignments with a product-specific derivation method in `references/interaction-patterns.md`; action wording may now adapt to locale and context while preserving target, authority, and consequence.
+- Reframed the element ledger around net interaction cost. Raw element count remains supporting evidence, but justified accessibility, safety, legal, and capability additions no longer require arbitrary one-in/one-out retirement.
+- Shortened `SKILL.md` through progressive disclosure and routed detailed AI, recurring-state, commit-control, ledger, craft, and review guidance to conditional references.
+- Corrected explicit Claude Code plugin invocation to the namespaced `/interaction-first-design:interaction-first-design` form.
+- Added focused evaluation scenarios for authorization boundaries, product-specific channel mappings, and justified multi-element additions. No 0.5.1 behavioral release claim is made until the revised suite is rerun with retained artifacts.
+- Added the MIT license and declared it in the plugin metadata.
+
 ## 0.5.0 — 2026-09-03
 
 - Narrowed automatic routing to interaction behavior, explicit UX/design audits, agent-initiated actions, and high-stakes UI; visual-only and routine implementation work no longer trigger the skill.
