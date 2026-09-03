@@ -25,6 +25,11 @@ It triggers on any UI creation, modification, review, or prototyping task — in
 | [references/design-review-protocol.md](references/design-review-protocol.md) | Evidence-based review protocol: render-and-walk, viewport tiers, craft pass, regression watchlist, severity-ranked report format |
 | [references/craft-baseline.md](references/craft-baseline.md) | Measurable exit criteria (WCAG 2.2 AA, Apple HIG, Material Design) for elements that survive the ledger — contrast, keyboard, touch targets, type, responsive, confirm-vs-undo, motion |
 | [references/ai-agent-interaction.md](references/ai-agent-interaction.md) | Applying the stance when an AI agent acts on the user's behalf (Horvitz's mixed-initiative principles, Microsoft/Google human-AI guidelines) |
+| [tests/pressure-log.md](tests/pressure-log.md) | Pressure-test scenarios and results — how the skill's wording was verified against agent behavior |
+
+## Pressure-tested
+
+The load-bearing wording is verified the way code is: baseline subagents run each scenario *without* the skill to document the failure (tooltips and CTAs added to score review points, a confirmation dialog shipped on a reversible delete, a style system generated before any interaction thinking), then agents reading the skill run the same scenario under the same pressure. Current suite: a completeness-pressured design review, a "ship the confirm dialog today" instruction, a style-first deliverable request (three converged reps), and a ledger-persistence fixture with a badge-shaped stakeholder request. All with-skill runs pass; scenarios and outcomes live in [tests/pressure-log.md](tests/pressure-log.md), and edits to the precedence, craft-scoping, confirm-vs-undo, or ledger rules should re-run that suite.
 
 ## Installation
 
