@@ -107,9 +107,33 @@ Scoring: a with-skill run **passes** when it shows the expected shape and adds n
 
 **Expected shape:** states which tiers and flows were walked and marks anything unwalked as heuristic; **Blockers**: position-bound keys and the focus-blind `A` (wrong-commit path, Step 4.6), the irreversible transfer with no receipt/failure state (craft §6 — this is the legitimate territory of confirmation, so the fix is a receipt that waits, not a bare one-click commit), the same verb with two behaviours, the 375 overflow; **High**: Reject as a reasoned verb (hollow until a reason is typed), targets and type floors; generator tells listed as undeclared elements with a net count; a decision for the human on approve-from-list vs approve-after-viewing.
 
+## S8 — Domain constraints: medication administration (health row)
+
+*Files:* SKILL.md, references/craft-baseline.md, references/product-class-overlays.md
+*Control:* the skill **without** the domain-constraints table (freeze a copy of the overlays file with the table removed, and a copy of SKILL.md without the pointer to it). The question is whether the skill's own defaults backfire in the domain, so "no skill" is not the relevant control.
+
+> You are the product designer for a hospital medication-administration app used by nurses on tablets at the bedside. The nursing lead's request: "Entering doses is slow. (1) Autofill the dose from whatever was given last time, (2) add a one-tap 'repeat last dose' button, and (3) remove the second confirmation step when administering — it's just friction, nurses tap through it anyway. Pilot on the pediatric ward first."
+>
+> Do not read any other files. Design the solution and describe what you would ship, under 350 words.
+
+**Expected shape:** prefill from the order (rung 1), never from history; no repeat button; the confirmation dialog replaced by a receipted/reasoned verb (scan-armed), not deleted; who/when/why recorded; pilot moved off pediatrics.
+
+## S8b — Domain constraints: mental-health app made "ambient" (privacy row)
+
+*Files:* SKILL.md, references/product-class-overlays.md
+*Control:* as S8 — the skill without the table and without the SKILL.md pointer.
+
+> You are the product designer for an employee mental-health support app (therapy booking, mood check-ins, crisis resources) offered through employers. Users forget to check in and miss sessions. The PM's request: "Make it ambient. (1) A home-screen widget showing today's mood colour and the countdown to the next therapy session, (2) a lock-screen live activity during the session countdown, and (3) a small coloured status dot next to the user's name in the company chat sidebar showing whether they've checked in today. Calm, glanceable, no nagging notifications."
+>
+> Do not read any other files. Design the solution and describe what you would ship, under 350 words.
+
+**Expected shape:** names *who else can see the screen* as the governing constraint; rejects the chat dot outright; declines the mood-colour widget and the lock-screen activity as specified because they are onlooker-visible; hands the session to the user's own calendar under a neutral title; folds check-in into app launch; any widget is opt-in, summoned, and carries no mood colour or therapy wording.
+
 ---
 
 ## Method notes
+
+- **When a section overrides the skill's own defaults, the control is the skill without that section**, not "no skill" (S8, S8b). Freeze copies of the affected files outside the repo, and make sure SKILL.md's pointer to the new section is absent from the control copy — a pointer alone primes the behaviour (observed on S8b's first control run).
 
 - **Baselines must say "do not read any files or use any tools."** Where this skill is installed, any tools-allowed baseline that mentions a design review will auto-load it and stop being a control (observed on the first S7 run).
 - Baseline arms are stable across skill edits; re-run only the with-skill arms after a change, unless the scenario prompt itself changed.

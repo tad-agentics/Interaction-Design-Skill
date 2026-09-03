@@ -77,7 +77,7 @@ Element-first: add a Sort dropdown. Interaction-first (rung 4): column headers a
 | [references/craft-baseline.md](references/craft-baseline.md) | Measurable exit criteria (WCAG 2.2 AA, Apple HIG, Material Design) for elements that survived the ledger — judges quality only, can never add an element |
 | [references/ai-agent-interaction.md](references/ai-agent-interaction.md) | Horvitz's mixed-initiative principles, the Microsoft human-AI guidelines, Google PAIR, Nielsen's intent-based paradigm — mapped to reducing interface |
 | [references/worked-examples.md](references/worked-examples.md) | Eight request → element-first → interaction-first walkthroughs with rungs and net counts |
-| [references/product-class-overlays.md](references/product-class-overlays.md) | How the channel map and the definition of cost change for feeds, learning/games, and persuasion surfaces |
+| [references/product-class-overlays.md](references/product-class-overlays.md) | How the channel map and the definition of cost change for feeds, learning/games, and persuasion surfaces; the domain-constraints table (money, health, public sector, regulated consent, safety-critical, children, privacy, shared devices) naming which rung each domain overrides |
 | [tests/scenarios.md](tests/scenarios.md) | Verbatim scenario prompts for both arms, expected shapes, and the not-yet-covered list — the re-runnable suite |
 | [tests/fixtures/](tests/fixtures/) | Fixture files the scenarios need: the two-round OpsQueue ledger and a renderable prototype seeded with wrong-commit paths and generator tells |
 | [tests/pressure-log.md](tests/pressure-log.md) | Outcomes from each run of the suite |
@@ -97,6 +97,8 @@ The load-bearing wording is verified the way code is. For each scenario, a basel
 | Inherited product redesign | Marketing brief, then "CEO decided, no debate" | Wizard, renames, expert-mode toggle, tooltips, tour | Mode question, ledger round zero, never-silently applied, wizard costed and argued side by side |
 | AI agent "trust" bundle (approval modal, confidence badge, thumbs, always-open why panel) | Sprint deadline | Weak control — rejects most of it unprompted | Execution gulf named, rungs 1–2 targeting, scope-down with one chip, verb state as confidence, explanation on request |
 | Rendered prototype review | Real browser walk | Contaminated (installed skill auto-loaded) | Walked 1440/375, observed a wrong-card commit from a positional key, receipt-that-waits for the irreversible transfer, generator tells as undeclared elements, 31 → 15 |
+| Medication dosing "speed-ups" (autofill from last dose, one-tap repeat, drop the confirmation) | Nursing lead + pediatric pilot | Control = skill without the domain table: already correct | Same design, now citing patient-context resets and the shared, family-visible tablet |
+| Mental-health app made "ambient" (mood widget, lock-screen activity, chat dot) | "Calm, glanceable" framing | Control = skill without the domain table: **shipped mood colour and a therapist's name onto onlooker-visible surfaces** | Who-else-can-see-the-screen governs: calendar hand-off under a neutral title, check-in folded into launch, opt-in summoned widget with no mood colour |
 
 All with-skill runs pass, and the whole suite was re-run after SKILL.md was restructured for token cost. Edits to the precedence, craft-scoping, confirm-vs-undo, ledger, or redesign rules should re-run the suite; see [tests/pressure-log.md](tests/pressure-log.md).
 

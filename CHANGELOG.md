@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 — 2026-09-03
+
+- `references/product-class-overlays.md`: "Domain constraints that move the ladder" — eight domains (money movement, health & safety, public sector, regulated consent, safety-critical operations, children's products, privacy-sensitive surfaces, shared devices), each naming the skill default it overrides and what applies instead. The interaction-level answer to industry-specific rules: it changes the rung, never the palette.
+- Pressure-tested with the skill-without-the-section as control: the health row reinforced an already-correct answer; the privacy row was necessary — without it the skill's own periphery instincts put a mood colour and a therapist's name on onlooker-visible surfaces.
+- Method note: for sections that override defaults, the control is the skill without the section and without any pointer to it.
+
 ## 0.4.0 — 2026-09-03
 
 - SKILL.md trimmed for per-invocation cost (4,623 → 4,137 words): worked examples moved to `references/worked-examples.md` (now eight, including two from the pressure suite); scope-by-product-type moved to `references/product-class-overlays.md`. The anti-pattern lexicon stays inline.

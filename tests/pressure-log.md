@@ -42,9 +42,25 @@ Full with-skill re-run of S1–S5b against the restructured SKILL.md (4,623 → 
 - RED: **contaminated** — the tools-allowed baseline auto-loaded the installed copy of this skill and produced a skill-shaped review (gulfs, rung 3, reasoned verbs, ledger −11). Not a control; recorded as a method finding. It did not declare render status, consistent with having loaded the older installed version that lacks the no-finding-without-evidence rule.
 - GREEN (1 rep): **first real exercise of render-and-walk** — opened the prototype, walked 1440 and 375, pressed `2` with nothing focused and observed TX-4472 commit (opacity change), screenshotted the 375 overflow, marked Reject as heuristic (no handler). Blockers: wrong-commit path (positional keys, focus-blind `A`), irreversible transfer with no receipt/failure state reconciled correctly with craft §6, same verb two behaviours, 375 overflow. High: Reject as reasoned verb, 44pt targets, 12px floor. Generator tells enumerated as undeclared elements; net 31 → 15; decision-for-the-human on approve-after-viewing. **Pass.**
 
+## 2026-09-03 — domain-constraints table (product-class-overlays.md)
+
+Control for both scenarios = the skill *without* the table (frozen pre-change copies of the overlays file and of SKILL.md without the pointer).
+
+**S8 — Medication administration** (autofill from last dose, one-tap repeat, remove the second confirmation, pilot on pediatrics).
+- Control (skill without table): **already correct** — prefill from the order not history, no repeat button, confirmation folded into barcode scans rather than deleted, undo scoped to the record, pilot moved off pediatrics. The existing craft §6 and reasoned/scoped verb rules carried it.
+- With table (1 rep): converges; additionally cites history-never-crosses-a-patient, the shared tablet, and the screen being visible to family. **Health row: reinforcing, not rescuing.**
+
+**S8b — Mental-health app made "ambient"** (mood-colour widget, lock-screen live activity, chat-sidebar check-in dot).
+- First control run was contaminated: SKILL.md on disk already pointed at the table, and the agent said so and applied privacy reasoning from the hint. Re-run against the committed SKILL.md.
+- Clean control (skill without table or pointer): **failed on the privacy axis** — rejected the chat dot, but shipped a home-screen widget whose background tint *is* the day's mood and a lock-screen Live Activity reading "Session with Maya · 12 min". The skill's own periphery/heat-channel instincts pushed health status onto onlooker-visible surfaces.
+- With table (1 rep): named *who else can see the screen* as the governing constraint, cited the override of "periphery before center," rejected the dot, declined widget and Live Activity as specified, calendar hand-off under a neutral title (rung 3), check-in folded into launch (rung 4), opt-in summoned widget with no mood colour. **Privacy row: necessary. Pass.**
+
+Decision: table kept. Rows tested: health (reinforcing), privacy (necessary), with shared-device and money rows exercised incidentally in S8 and S7. Untested rows: public sector, regulated consent, safety-critical, children.
+
 ## Method notes
 
 - Baselines must forbid tools; where this skill is installed, a tools-allowed baseline auto-loads it (S7).
+- For a section that overrides the skill's defaults, the control is the skill without the section — and without any pointer to it (S8b).
 
 - Independent confirmation from the field: the taste-skill project reports that agents "historically ignored em-dash limits when phrased as 'use sparingly'" and only complied when the rule became binary. Same finding as this suite — soft quantifiers don't bind; observable predicates and countable caps do.
 
