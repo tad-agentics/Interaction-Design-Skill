@@ -66,12 +66,13 @@ Element-first: add a Sort dropdown. Interaction-first (rung 4): column headers a
 - **Inheriting an existing UI** — detect preserve-vs-overhaul before any design work; the audit becomes ledger round zero; habits are load-bearing; never silently change slugs, nav labels, form field names, tracked IDs, the logo, legal copy, or existing accessibility wins.
 - **Craft and accessibility QA** — contrast, keyboard and focus, touch targets, type resilience, responsive tiers, the confirm-vs-undo rule (confirmation only where undo cannot reach), motion, layout stability.
 - **Multi-round work with design agents** — the regression watchlist (decoration creep, banned patterns returning under new names, generator tells, fixture drift), comply-or-argue collaboration, and convergence criteria.
+- **Product classes and domains** — task/decision products get the core at full strength; feeds, learning/games, and persuasion surfaces get a remapped channel map and cost model. Eight domains (money movement, health & safety, public sector, regulated consent, safety-critical operations, children's products, privacy-sensitive surfaces, shared devices) override specific rungs — undo-beats-confirm, infer-from-history, glanceable status — and the table says what applies instead. Domain changes the rung, never the palette.
 
 ## Repository contents
 
 | Path | Purpose |
 | --- | --- |
-| [SKILL.md](SKILL.md) | The skill: stance, precedence, workflow, AI-agent section, deliverable formats, worked examples, anti-pattern lexicon |
+| [SKILL.md](SKILL.md) | The skill: stance, precedence, workflow (ladder, interaction spec, constraints, channel physics, verb sovereignty, ledger), AI-agent section, deliverable formats, anti-pattern lexicon, pointers to the references |
 | [references/foundations.md](references/foundations.md) | The research canon — Norman, Hutchins/Hollan, Verplank, Raskin, Cooper, Saffer, Nielsen, Bret Victor, Weiser & Brown, Krishna, Herigstad — with sources |
 | [references/design-review-protocol.md](references/design-review-protocol.md) | Render-and-walk practice, the craft pass, inheriting a UI, the regression watchlist, design-system review, comply-or-argue, report format, convergence |
 | [references/craft-baseline.md](references/craft-baseline.md) | Measurable exit criteria (WCAG 2.2 AA, Apple HIG, Material Design) for elements that survived the ledger — judges quality only, can never add an element |
@@ -86,9 +87,9 @@ Element-first: add a Sort dropdown. Interaction-first (rung 4): column headers a
 
 ## Pressure-tested
 
-The load-bearing wording is verified the way code is. For each scenario, a baseline subagent runs *without* the skill to document the failure, then an agent that reads the skill runs the same scenario under the same pressure. Current suite:
+The load-bearing wording is verified the way code is. For each scenario, a control subagent runs first to document the failure — *without* the skill for core rules, or with the skill *minus the section under test* when that section overrides the skill's own defaults — then an agent that reads the skill runs the same scenario under the same pressure. Current suite:
 
-| Scenario | Pressure | Baseline failure | With skill |
+| Scenario | Pressure | Control | With skill |
 | --- | --- | --- | --- |
 | Design review of a flawed table | "Miss nothing" completeness | Tooltips, CTA blocks, confirm dialog, two unrequested elements | Verdict-first, heuristic-labeled, undo not confirm, sort on headers (net −1), one CTA max |
 | "Add a confirmation dialog before delete" | Ship today | Built the dialog | Soft-delete + undo, ledger net 0, argued the case |
@@ -100,7 +101,7 @@ The load-bearing wording is verified the way code is. For each scenario, a basel
 | Medication dosing "speed-ups" (autofill from last dose, one-tap repeat, drop the confirmation) | Nursing lead + pediatric pilot | Control = skill without the domain table: already correct | Same design, now citing patient-context resets and the shared, family-visible tablet |
 | Mental-health app made "ambient" (mood widget, lock-screen activity, chat dot) | "Calm, glanceable" framing | Control = skill without the domain table: **shipped mood colour and a therapist's name onto onlooker-visible surfaces** | Who-else-can-see-the-screen governs: calendar hand-off under a neutral title, check-in folded into launch, opt-in summoned widget with no mood colour |
 
-All with-skill runs pass, and the whole suite was re-run after SKILL.md was restructured for token cost. Edits to the precedence, craft-scoping, confirm-vs-undo, ledger, or redesign rules should re-run the suite; see [tests/pressure-log.md](tests/pressure-log.md).
+All with-skill runs pass, and the whole suite was re-run after SKILL.md was restructured for token cost. Two results are worth knowing: the medication scenario showed the skill's existing rules already handled a high-stakes domain, so the health row of the domain table reinforces rather than rescues; the mental-health scenario showed the opposite — without the privacy row, the skill's own "periphery before center" instinct put health status on onlooker-visible surfaces. Edits to the precedence, craft-scoping, confirm-vs-undo, ledger, redesign, or domain-constraint rules should re-run the suite; see [tests/scenarios.md](tests/scenarios.md) for the prompts and [tests/pressure-log.md](tests/pressure-log.md) for outcomes.
 
 ## Installation
 
@@ -124,4 +125,4 @@ Claude invokes it automatically on matching tasks, or explicitly with `/interact
 
 ## Influences
 
-The interaction-first core is grounded in the research listed in [references/foundations.md](references/foundations.md). The review and craft machinery was elevated by studying two other design skills: [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) contributed the evidence-based review structure, measurable craft criteria, and persisted-decision pattern; [taste-skill](https://github.com/Leonxlnx/taste-skill) contributed the redesign protocol, the "generator tells" framing, and field confirmation that binary rules bind where "use sparingly" does not. Both were adapted under this skill's precedence rule: interaction design decides existence, craft rules decide quality, style comes last.
+The interaction-first core is grounded in the research listed in [references/foundations.md](references/foundations.md). The review and craft machinery was elevated by studying two other design skills: [ui-ux-pro-max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) contributed the evidence-based review structure, measurable craft criteria, and persisted-decision pattern; [taste-skill](https://github.com/Leonxlnx/taste-skill) contributed the redesign protocol, the "generator tells" framing, and field confirmation that binary rules bind where "use sparingly" does not. Both were adapted under this skill's precedence rule: interaction design decides existence, craft rules decide quality, style comes last. Some things were deliberately not taken: ui-ux-pro-max's 192 industry-specific reasoning rules map industries to palettes, fonts, and landing-page skeletons — style-layer lookups that would train agents to skip interaction thinking. Their place here is the eight-row domain-constraints table, which changes which rung an interaction lands on and never prescribes a look.
