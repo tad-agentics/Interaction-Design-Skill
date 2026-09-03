@@ -10,7 +10,9 @@ When active, the skill enforces a workflow that runs **before** writing UI code 
 
 1. **Name the goal and the gulf** — is the problem a gulf of execution (user can't see how to act) or a gulf of evaluation (user can't tell what happened)?
 2. **Search for a cheaper move** — inference from context and history, better defaults, undo instead of confirm, peripheral status instead of central chrome — before any new widget.
-3. **Keep an element ledger** — every element added across design rounds must earn its place, and additions are tracked so the interface doesn't grow monotonically.
+3. **Keep an element ledger** — every element added across design rounds must earn its place, and additions are tracked so the interface doesn't grow monotonically. The ledger persists at `design/LEDGER.md` in the project, read before every round and never regenerated over.
+
+The skill orders every decision through a three-layer precedence: **existence** (does the element deserve to exist — the ladder and ledger), then **quality** (is the surviving element built to measurable standard — the craft baseline), then **style** (visual direction, chosen last). Craft and style rules can never create an element; only the ladder can.
 
 It triggers on any UI creation, modification, review, or prototyping task — including requests as small as "add a button" or "fix this UX" — and always for design reviews, visual state systems, and AI-agent experiences.
 
@@ -20,7 +22,8 @@ It triggers on any UI creation, modification, review, or prototyping task — in
 | --- | --- |
 | [SKILL.md](SKILL.md) | The skill itself: core stance, workflow, and trigger conditions |
 | [references/foundations.md](references/foundations.md) | The research the stance is grounded in — Norman, Hutchins/Hollan, Verplank, Raskin, Cooper, Saffer, Bret Victor, Weiser & Brown, Herigstad, Horvitz |
-| [references/design-review-protocol.md](references/design-review-protocol.md) | Protocol for auditing screens, prototypes, and design systems against the interaction-first standard |
+| [references/design-review-protocol.md](references/design-review-protocol.md) | Evidence-based review protocol: render-and-walk, viewport tiers, craft pass, regression watchlist, severity-ranked report format |
+| [references/craft-baseline.md](references/craft-baseline.md) | Measurable exit criteria (WCAG 2.2 AA, Apple HIG, Material Design) for elements that survive the ledger — contrast, keyboard, touch targets, type, responsive, confirm-vs-undo, motion |
 | [references/ai-agent-interaction.md](references/ai-agent-interaction.md) | Applying the stance when an AI agent acts on the user's behalf (Horvitz's mixed-initiative principles, Microsoft/Google human-AI guidelines) |
 
 ## Installation

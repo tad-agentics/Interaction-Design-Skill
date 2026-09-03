@@ -4,12 +4,13 @@ How to review screens, prototypes, and design systems — your own or a design a
 
 Contents
 1. Render and walk — never review from the notes
-2. The regression watchlist
-3. Reviewing a design system document
-4. Self-limiting system rules
-5. Working with a design agent: comply-or-argue
-6. Review output format
-7. Convergence: when to stop designing
+2. The craft pass
+3. The regression watchlist
+4. Reviewing a design system document
+5. Self-limiting system rules
+6. Working with a design agent: comply-or-argue
+7. Review output format
+8. Convergence: when to stop designing
 
 ---
 
@@ -22,8 +23,18 @@ A design agent's notes describe intent; only the render shows what shipped. Ever
 - Walk the flows, don't just view the screens: open the object from *every* surface it appears on (queue, zoomed list, palette, chat card) and verify the same interaction results; fire the exception path; commit and check what the screen does afterwards.
 - Compare claims to pixels. If the notes say "auto-collapses on entry" or "net −1 per row," verify by walking; the most dangerous gap is a well-written note describing behaviour that isn't built.
 - Check ordered fixes from prior rounds one by one. Items silently dropped ("was ordered cut, still present") get listed by name; agents reliably apply the interesting fixes and shed the housekeeping.
+- Walk the responsive tiers — **375 / 768 / 1024 / 1440 / 1920** — and screenshot each. Horizontal scroll, clipped or overlapping content, and navigation that collapses by accident rather than design are findings at the tier where they appear.
+- Stress the render: paste a very long string into every text container, load the empty case, and (for anything async) watch the loading state on a slow connection. A layout that only survives the demo data hasn't been reviewed.
+- Read the console on every walked flow. Errors, failed requests, and 404 assets are evidence and often explain a visual defect you already screenshotted.
+- **No finding without something the walk showed.** If the artifact could not be rendered, say so plainly and mark every remaining observation as heuristic (from reading code or notes) — never present an unrendered judgement as an observed one.
 
-## 2. The regression watchlist
+## 2. The craft pass
+
+After the walk, run `craft-baseline.md` over the elements that survive the ladder/ledger audit: contrast at the strongest tint, keyboard and focus order, touch-target sizes, type resilience, the responsive tiers above, confirm-vs-undo, motion, layout stability. Every check there carries a number, so every craft finding is measurable, not a taste call.
+
+Scope discipline: the craft pass judges **quality of existing elements only**. If a craft check appears to demand a new element ("this needs a tooltip / badge / empty-state block"), it is not a craft finding — write it up as a ladder question (which rung actually closes this gulf?) and say so in the report. A review that scores points by adding elements has inverted the skill.
+
+## 3. The regression watchlist
 
 Discipline decays in predictable ways. Check for each by name, every round:
 
@@ -37,7 +48,7 @@ Discipline decays in predictable ways. Check for each by name, every round:
 - **The armed look that isn't armed.** A filled/primary-styled control that doesn't commit in one gesture in *this* context (but does elsewhere) is a mode. Same look = same behaviour, every surface.
 - **Meaning drift between channels.** A colour reserved for one channel (e.g. urgency) reused for links, branding, or focus. Each colour family belongs to one channel; check new elements against the channel map.
 
-## 3. Reviewing a design system document
+## 4. Reviewing a design system document
 
 A design system is reviewed as an *operating constitution*, not a style sheet:
 
@@ -50,7 +61,7 @@ A design system is reviewed as an *operating constitution*, not a style sheet:
 - Check **platform/module boundaries**: the system defines what an extension may add (vocabulary: verbs, fields, labels, translations, layouts within its own surface) and what it may never add (channels, tiers, tokens, primitives, motions, keystrokes, commit controls, exemptions). A module needing a new primitive is a platform change request, argued centrally, with something retired in exchange.
 - Check **document governance**: the system files as an edit/version of the canonical design doc, not a new parallel document; superseded material is archived, not left ambient.
 
-## 4. Self-limiting system rules
+## 5. Self-limiting system rules
 
 The strongest systems constrain their own future. Look for (and add, if missing):
 
@@ -60,7 +71,7 @@ The strongest systems constrain their own future. Look for (and add, if missing)
 - **One meaning per channel, one channel per meaning** — and any surface may redefine at most one declared channel (e.g. a module's layout redefines what position means on its own canvas) while all others keep their platform meaning.
 - **Additions retire something.** Platform-level additions in particular: the shell only grows by exchange.
 
-## 5. Working with a design agent: comply-or-argue
+## 6. Working with a design agent: comply-or-argue
 
 The best agent rounds are not the most obedient ones. Set the expectation explicitly, and review for it:
 
@@ -70,19 +81,19 @@ The best agent rounds are not the most obedient ones. Set the expectation explic
 - **The reviewer can be wrong.** When the agent's argument beats the instruction (e.g. a motion rule that violates "nothing moves unless the world changed"), the review says so and the doctrine updates. Ratify good unsolicited changes explicitly — an unratified improvement is a landmine for the next round.
 - **Ratify or reject every structural change, by name.** Silent structural changes that survive a round become de-facto doctrine without ever being argued.
 
-## 6. Review output format
+## 7. Review output format
 
-Lead with the verdict, in one sentence, including whether the round converged or drifted. Then:
+Lead with the verdict, in one sentence: **Ship / Ship with fixes / Needs work**, plus whether the round converged or drifted, and which viewports were walked. Then:
 
 1. **Ratify** — good changes (asked-for or not), named explicitly so they enter doctrine.
-2. **Violations / regressions** — each tied to the rule it breaks (by name), with the observed evidence (what the walk showed, not what the notes said). Severity: wrong-commit paths and doctrine breaks first; housekeeping last.
+2. **Violations / regressions** — each written as *observation → rule broken (by name) → fix*, with the evidence (screenshot, measured value, console line — what the walk showed, not what the notes said). Rank in four tiers: **Blocker** (wrong-commit paths, doctrine breaks, craft-baseline accessibility failures — gates shipping), **High** (fix before merge), **Medium** (noticeably better if fixed), **Nit** (prefixed "Nit:", never gates anything). Distinguish "broken" from "I'd prefer" — only Blockers and Highs gate.
 3. **Decisions for the human** — genuine trade-offs (axis purity vs control constancy, etc.) stated as a choice with a recommendation, not silently resolved.
 4. **The fix block** — a numbered, copy-paste instruction for the next round: fixes first, then new work, then what to deliver as proof. Keep ordered items checkable; next round begins by checking them.
 5. **Net element count** for the round.
 
 The biggest removal leads; never a laundry list with the lede buried.
 
-## 7. Convergence: when to stop designing
+## 8. Convergence: when to stop designing
 
 Watch net element delta per round and the ratio of new-structure to polish. The design has converged when a round completes remaining interactions while adding essentially nothing, and fixes are cosmetic. At that point:
 

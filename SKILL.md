@@ -1,6 +1,6 @@
 ---
 name: interaction-first-design
-description: Solve user problems with interactions, not by adding interface elements — and audit design work against that standard. Use whenever creating, modifying, reviewing, or prototyping any UI, screen, component, flow, onboarding, settings page, empty state, notification, or AI-agent experience — in Claude Code, Cursor, Claude Design, or any frontend task. Trigger even when the user only says "add a button/toggle/badge/modal/tooltip", "fix this UX", "users are confused", or asks for a mockup. Always trigger for DESIGN REVIEWS of screens, prototypes, or design systems (including output from design agents like Claude Design), for defining visual state systems (colour/glow/motion/urgency), for element ledgers across design rounds, and when an AI agent acts on the user's behalf. Grounded in Norman, Hutchins/Hollan, Verplank, Raskin, Cooper, Saffer, Bret Victor, Weiser & Brown, Herigstad, Horvitz, and the Microsoft/Google human-AI guidelines.
+description: Solve user problems with interactions, not by adding interface elements — and audit design work against that standard. Use whenever creating, modifying, reviewing, or prototyping any UI, screen, component, flow, onboarding, settings page, empty state, notification, or AI-agent experience, and for craft QA — accessibility/WCAG, contrast, touch targets, keyboard, responsive layout, typography, motion. Trigger even when the user only says "add a button/toggle/badge/modal/tooltip", "fix this UX", "users are confused", or asks for a mockup. Always trigger for DESIGN REVIEWS of screens, prototypes, or design systems (including output from design agents like Claude Design), for defining visual state systems (colour/glow/motion/urgency), for element ledgers across design rounds, and when an AI agent acts on the user's behalf. Grounded in Norman, Hutchins/Hollan, Verplank, Raskin, Cooper, Saffer, Bret Victor, Weiser & Brown, Herigstad, Horvitz, and the Microsoft/Google human-AI guidelines.
 ---
 
 # Interaction-first design
@@ -22,6 +22,16 @@ This skill makes that stance the default operating procedure. Interface design i
 5. **Periphery before center.** Status belongs in the periphery (calm) and moves to the center only when action is needed.
 6. **Modes are bugs.** Same input must produce the same result. If you need a mode, make it a quasimode (held, not toggled).
 7. **Habit is the goal.** Interfaces are used hundreds of times; the design target is the thousandth use, not the first.
+
+## Precedence — three layers, in order
+
+Every UI decision passes through three layers, and the order is not negotiable:
+
+1. **Existence** — does the element exist at all? Decided by the ladder (Step 2) and paid for in the ledger (Step 5). Nothing below this layer can create an element.
+2. **Quality** — is the surviving element built to standard? Decided by `references/craft-baseline.md` (contrast, touch targets, keyboard, type resilience, responsive tiers, reversal, motion). A craft check that seems to demand a *new* element is a ladder question in disguise — send it back to layer 1.
+3. **Style** — visual direction (palette, typography voice, effects, signature aesthetics). Chosen last, applied to interactions that already work. A style system generated before the interaction spec exists is decoration looking for a product.
+
+One consequence worth stating plainly: for **conversion surfaces** (landing/marketing pages, first-contact flows) style may legitimately optimize the first impression; for **product surfaces** (the tool someone uses daily) the thousandth-use rules above win every conflict between the layers.
 
 ## Workflow — run this BEFORE writing UI code or drawing a screen
 
@@ -129,6 +139,8 @@ The ledger is a *living document across rounds*, not a one-shot form. Rules that
 - **Live prototypes carry ledgers like any frame.** Builds are where undeclared elements leak in.
 - Aim for net-zero or net-negative element count per change; if a feature genuinely needs three new elements, the design is probably wrong at rung 0.
 
+**Persistence.** The ledger lives at `design/LEDGER.md` in the project root (page- or module-specific ledgers under `design/pages/<name>.md`, overriding the master for that surface only). Before any design round: read the existing ledger first; entries in it are prior decisions, not suggestions. Never overwrite or regenerate a ledger that exists — append entries and log corrections in place. If no ledger exists, create one with the current element census as round zero.
+
 ## When the product contains an AI agent
 
 AI products accumulate interface faster than anything else, because uncertainty tempts designers to add hedges: confidence badges, "why?" panels, thumbs up/down, regenerate buttons, approval dialogs, step-by-step plan viewers. Most of these are gulf-of-evaluation patches for a gulf-of-execution problem (the agent didn't scope its action to its confidence). The paradigm shift matters here: Nielsen calls it intent-based outcome specification — the user states the outcome, not the steps — which reverses the locus of control and makes turn-by-turn refinement the interaction to design, not a settings panel.
@@ -180,10 +192,11 @@ When asked to review a UI, screen, or flow:
 1. State the goal and the gulf for the primary task.
 2. List every interactive element with its rung (0–6) and what it costs.
 3. For each rung-6 element, propose the lowest rung that would replace it.
-4. Give a net element count: current → proposed.
-5. Flag modes, confirmations on reversible actions, explanatory UI, and center-of-attention status that should be peripheral.
+4. Run the craft pass (`references/craft-baseline.md`) over the surviving elements.
+5. Give a net element count: current → proposed.
+6. Flag modes, confirmations on reversible actions, explanatory UI, and center-of-attention status that should be peripheral.
 
-Lead with the biggest removal, not the longest list.
+Open with a one-line verdict (ship / ship with fixes / needs work), rank findings by severity, and back each with observed evidence — the full report format, evidence rules, and regression watchlist are in `references/design-review-protocol.md`. Lead with the biggest removal, not the longest list.
 
 ## Worked examples (request → element-first response → interaction-first response)
 
@@ -243,4 +256,5 @@ Read these when you need the underlying argument, the full guideline sets, or ci
 
 - `references/foundations.md` — the interaction-design canon: Norman's principles and the two gulfs, Hutchins/Hollan/Norman on directness, Verplank's Do/Feel/Know, Raskin's modes and habituation, Cooper's goal-directed principles and excise, Saffer's microinteraction anatomy, Nielsen's progressive disclosure, Bret Victor's Magic Ink, Weiser & Brown's calm technology, Krishna's NoUI principles, Herigstad's spatial/motion/distance practice. With source links.
 - `references/ai-agent-interaction.md` — Horvitz's 12 mixed-initiative principles, Microsoft's 18 Human-AI Interaction guidelines (full text), Google PAIR guidebook structure, Nielsen's intent-based paradigm, and how each maps to reducing interface. With source links.
-- `references/design-review-protocol.md` — how to review design work (your own or a design agent's) across rounds: render-and-walk practice, the regression watchlist, self-limiting system rules, comply-or-argue collaboration, and the review output format. Read it whenever auditing screens, prototypes, or a design system.
+- `references/design-review-protocol.md` — how to review design work (your own or a design agent's) across rounds: render-and-walk practice, viewport tiers, the craft pass, the regression watchlist, self-limiting system rules, comply-or-argue collaboration, and the severity-ranked review output format. Read it whenever auditing screens, prototypes, or a design system.
+- `references/craft-baseline.md` — measurable exit criteria (WCAG 2.2 AA, Apple HIG, Material Design numbers) for elements that survived the ledger: contrast, keyboard and focus, touch targets, type resilience, responsive tiers, the confirm-vs-undo rule, motion, layout stability, charts. Read it for any craft/accessibility QA pass or before calling UI work delivery-ready. It judges quality only — it can never add an element.
