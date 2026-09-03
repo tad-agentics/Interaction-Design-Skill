@@ -1,6 +1,6 @@
-# Pressure-test log
+# Historical pressure-run log
 
-Subagent scenario tests of the skill's wording (RED = baseline agent without the skill; GREEN = agent instructed to read the skill files first). Re-run these scenarios after any edit to the precedence section, craft baseline §6, the craft-pass scoping rule, or the ledger persistence rules.
+Historical summaries of exploratory subagent runs (RED = baseline agent without the skill; GREEN = agent instructed to read the skill files first). These runs predate the reproducibility requirements now defined in `scenarios.md`: most used one repetition, raw outputs and full environment metadata were not retained, and one control was contaminated. They demonstrate candidate behaviors but do not validate UX quality or support statistical release claims. Re-run both arms under the current method after material skill or harness changes.
 
 ## 2026-09-03 — precedence + craft baseline + ledger persistence
 
@@ -40,7 +40,7 @@ Full with-skill re-run of S1–S5b against the restructured SKILL.md (4,623 → 
 
 **S7 — Rendered prototype review** (`fixtures/opsqueue-prototype.html`).
 - RED: **contaminated** — the tools-allowed baseline auto-loaded the installed copy of this skill and produced a skill-shaped review (gulfs, rung 3, reasoned verbs, ledger −11). Not a control; recorded as a method finding. It did not declare render status, consistent with having loaded the older installed version that lacks the no-finding-without-evidence rule.
-- GREEN (1 rep): **first real exercise of render-and-walk** — opened the prototype, walked 1440 and 375, pressed `2` with nothing focused and observed TX-4472 commit (opacity change), screenshotted the 375 overflow, marked Reject as heuristic (no handler). Blockers: wrong-commit path (positional keys, focus-blind `A`), irreversible transfer with no receipt/failure state reconciled correctly with craft §6, same verb two behaviours, 375 overflow. High: Reject as reasoned verb, 44pt targets, 12px floor. Generator tells enumerated as undeclared elements; net 31 → 15; decision-for-the-human on approve-after-viewing. **Pass.**
+- GREEN (1 rep): **first real exercise of render-and-walk** — opened the prototype, walked 1440 and 375, pressed `2` with nothing focused and observed TX-4472 commit (opacity change), screenshotted the 375 overflow, marked Reject as heuristic (no handler). It correctly found the wrong-commit path, irreversible transfer with no receipt/failure state, same verb with two behaviours, and responsive overflow. It also incorrectly treated Apple's 44pt target recommendation and a 12px type preference as web conformance findings; the current craft baseline and S7 rubric explicitly prevent those false positives. Historical result retained rather than relabeled as a pass.
 
 ## 2026-09-03 — domain-constraints table (product-class-overlays.md)
 
@@ -59,10 +59,10 @@ Decision: table kept. Rows tested: health (reinforcing), privacy (necessary), wi
 
 ## Method notes
 
-- Baselines must forbid tools; where this skill is installed, a tools-allowed baseline auto-loads it (S7).
-- For a section that overrides the skill's defaults, the control is the skill without the section — and without any pointer to it (S8b).
+- Historical method note: these runs tried to avoid auto-loading by forbidding tools in baseline prompts. That method is now superseded because it changes more than one variable; current runs use isolated environments with identical prompts and tool policies.
+- For an ablation of a section that overrides the skill's defaults, store the edited skill fixture and disclose it. Retain a true no-skill baseline for package-level claims.
 
 - Independent confirmation from the field: the taste-skill project reports that agents "historically ignored em-dash limits when phrased as 'use sparingly'" and only complied when the rule became binary. Same finding as this suite — soft quantifiers don't bind; observable predicates and countable caps do.
 
 - With-skill agents were told only to read the skill files, then given the same scenario as baseline; pressures used: completeness/authority (S1), time + explicit instruction (S2), deadline + deliverable framing (S3), stakeholder request (S4).
-- Convergence across reps is the signal that wording binds; divergent reps mean tighten the form, not add words (see superpowers:writing-skills).
+- Repetition can reveal instability, but release claims require the retained artifacts, controlled setup, disclosed rubric, and multiple runs specified in `scenarios.md`.

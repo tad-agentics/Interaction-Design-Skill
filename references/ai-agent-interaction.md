@@ -132,19 +132,19 @@ Run this at each place the agent could act:
    - High confidence, low cost → **act**, show the result in place, undo available.
    - Medium confidence, low cost → **act on the certain subset**, position the rest for direct completion (Lookout: open the right week).
    - Any confidence, high cost, reversible by design possible → **make it reversible, then act**.
-   - Low confidence, high cost, not reversible → **ask with choices** (max one question, inline, dismissible by ignoring; a timeout that evaporates).
+   - Low confidence, high cost, not reversible → **ask the minimum needed to establish intent and authority**; offer choices when the valid options are known and use an open question when inventing options would be unsafe.
    - Low confidence, low value, user busy → **wait**; leave a peripheral affordance for manual invocation.
 5. After the user corrects: apply G16 once (show the consequence), G13 (learn), G14 (don't disrupt).
 
 ## 6. Control surface: the minimum set
 
-For most AI features, the complete control surface is:
+For many low- and medium-risk AI features, start with this control surface and add controls only when authority, safety, compliance, collaboration, or recovery requires them:
 
 - **Invoke** (G7) — selection, keystroke, or the natural next action on an object. Not a floating button.
-- **Dismiss** (G8) — ignore, Esc, or scroll past. Never a modal.
+- **Dismiss** (G8) — ignore, Esc, scroll past, or another control appropriate to the surface. Do not introduce a modal solely to dismiss a non-blocking suggestion.
 - **Correct** (G9) — edit the output in place. The edit is the feedback (G15) and the learning signal (G13).
-- **Undo** — one gesture, always, for anything the agent did.
+- **Undo** — one easy gesture for effects the product can genuinely and reliably restore; use preview, approval, or a scoped action for effects it cannot.
 - **Why** (G11) — on request, near the output.
 - **Scope** (G17) — one global control over what the agent may touch; one on/off.
 
-If a design needs more than these six, it is almost certainly compensating for an action that should have been scoped down (G10) or made reversible.
+If a design needs more than these six, check whether the action should instead be scoped down (G10), made reversible, or protected by an authority/safety boundary. Keep additional controls when that review identifies a concrete need.

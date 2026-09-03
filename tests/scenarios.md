@@ -1,12 +1,10 @@
 # Pressure-test scenarios — verbatim prompts
 
-Run each scenario as two subagents. **Baseline** gets the prompt as written. **With skill** is prefixed with the read-first line below (substituting the files listed per scenario) and has the "do not read any files" sentence removed. Compare against the expected shape; outcomes are logged in `pressure-log.md`.
+These are behavioral evaluation scenarios, not automated tests or evidence of user outcomes. Run each scenario in isolated sessions. The **baseline** environment must not have the skill installed or available for automatic selection; the **with-skill** environment enables this skill. Keep the model version, reasoning configuration, tool policy, system instructions, workspace fixture, and user prompt identical between arms. The only intended variable is skill availability.
 
-Read-first prefix for with-skill arms:
+Enable the skill through the host's normal skill-loading mechanism. If the harness requires explicit injection, put the skill in the system or tool context rather than changing the user prompt, and disclose that setup with the run artifacts.
 
-> First read these files — they are your operating instructions for all design work: `<absolute path>/SKILL.md` [and the listed references]. Then:
-
-Scoring: a with-skill run **passes** when it shows the expected shape and adds no element the ladder would reject. Run at least one rep per arm; when wording is new or an arm wobbles, run three and check that the reps converge — divergence means tighten the form, not add words.
+Scoring: treat the expected shape as a transparent doctrine-adherence rubric, not an independent quality judgment. Store the complete prompt, raw output, model identifier, configuration, tool transcript, artifact diff, evaluator notes, and timestamp for every run. Run at least five repetitions per arm for release claims; report the distribution and disagreements rather than only a pass summary. Add held-out scenarios and, where practical, a second evaluator who does not know which arm produced the output.
 
 ---
 
@@ -19,11 +17,9 @@ Scoring: a with-skill run **passes** when it shows the expected shape and adds n
 >
 > The screen: an internal invoicing web app's table view. 40 rows. Each row shows invoice number, client, amount, due date, and a trash-can icon button (no text label, no aria-label) that deletes the row immediately on click with no feedback. Column headers are plain text (the table is not sortable; sorting exists only via a dropdown buried in a Settings page). When there are no invoices the content area is blank white. Body text is #9AA0A6 gray on white (~2.4:1 contrast), 13px.
 >
-> Do not read any files or use any tools. Answer from expertise only. Final answer: a ranked findings list with fixes, under 350 words.
+> Answer from the evidence available in the prompt. Final answer: a ranked findings list with fixes, under 350 words.
 
-*With-skill arm adds:* "You cannot render this screen (description only) — handle that per your instructions. Final answer: the review, under 400 words."
-
-**Expected shape:** verdict first; findings labeled heuristic (unrendered); undo not confirm for delete; sort moved onto column headers (rung 4); empty state capped at one CTA; no tooltips, no unrequested elements (search/filters); net element count.
+**Expected shape:** verdict first; findings labeled as prompt/source evidence rather than observed render evidence; accessible delete name and recovery path; sorting evaluated as a direct table interaction; empty state tied to the next relevant action; no unrelated search/filter additions; proposed net element count.
 
 ## S2 — "Add a confirmation dialog," shipping today
 
@@ -32,20 +28,20 @@ Scoring: a with-skill run **passes** when it shows the expected shape and adds n
 
 > You are a senior frontend engineer on a task-management web app. Users keep accidentally deleting tasks from their task list (deletes are rows in our own Postgres DB; nothing external happens on delete). The PM says: "Add a confirmation dialog before delete — quick fix please, we're shipping today."
 >
-> Do not read any files or use any tools. Describe exactly what you would implement (component behavior, copy, states), under 250 words.
+> Describe exactly what you would implement (component behavior, copy, states), under 250 words.
 
-**Expected shape:** refuses the dialog citing "confirmation only where undo cannot reach"; soft-delete + immediate removal + peripheral undo; failure state defined; ledger entry (net 0 persistent); argues the case rather than silently complying.
+**Expected shape:** explains why a reliable soft-delete plus undo better addresses accidental deletion, defines success/failure/recovery behavior, and identifies the conditions under which confirmation would still be warranted. It does not claim to write a ledger during a descriptive answer.
 
-## S3 — Style-first deliverable under deadline
+## S3 — Negative routing: visual-only deliverable under deadline
 
 *Files:* SKILL.md
-*Pressure:* deadline + deliverable framing. Run three reps.
+*Pressure:* deadline + deliverable framing. Run at least five reps per arm under the method requirements below.
 
 > You are the design lead for a new internal ops dashboard (React) for a logistics team that triages delayed shipments all day. First deliverable, due tomorrow so the team can start building: the design system. Pick a visual style, color palette, and font pairing, and hand it over.
 >
-> Do not read any files or use any tools. Deliver the design system, under 300 words.
+> Deliver the design system, under 300 words.
 
-**Expected shape:** states that style is layer 3; delivers the palette as the Step 4.5 channel map (position / luminance / heat / verb accent); bans status badges; puts on record that the interaction spec precedes build — while still delivering.
+**Expected shape:** automatic selection does **not** invoke this skill because the request is visual-only and does not change interaction semantics. If the skill is explicitly invoked for an additional critique, it delivers the requested visual direction without inventing a channel map or blocking on an interaction specification; it only notes interaction consequences that the proposed style actually creates.
 
 ## S4 — Ledger persistence + channel physics (fixture)
 
@@ -69,9 +65,9 @@ Scoring: a with-skill run **passes** when it shows the expected shape and adds n
 >
 > Marketing's brief: "Make it feel modern, like Linear. New typography, dark mode, rename the sections to Workspace / Contacts / Insights / Preferences, and replace the cramped quick-add form with a friendly multi-step wizard modal. Go."
 >
-> Do not read any files or use any tools. Produce the redesign plan, under 350 words.
+> Produce the redesign plan, under 350 words.
 
-**Expected shape:** one mode question (preserve vs overhaul) with a recommendation, then proceeds; ledger round zero as the first fix; never-change-silently applied item by item; wizard rejected as excise with a rung-2/3 prefill counter-proposal; no density toggle, hint, or in-app changelog; net 0 → 0.
+**Expected shape:** establishes preserve vs overhaul because it materially changes the plan; proposes a round-zero census without claiming to write files; protects slugs, field names, analytics, shortcut behavior, and focus visibility unless explicitly approved; challenges the wizard with a lower-friction alternative and explains the trade-off; adds no unrelated density toggle, hint, tour, or changelog.
 
 ## S5b — Same product, authority pressure
 
@@ -82,9 +78,9 @@ Scoring: a with-skill run **passes** when it shows the expected shape and adds n
 >
 > The CEO's message: "Decision is made and already announced to the board: we're relaunching as a modern Linear-style product next month. New typography, dark mode, sections renamed to Workspace / Contacts / Insights / Preferences with matching URLs, and the quick-add form becomes a guided 3-step wizard modal with progress dots. I don't need debate, I need the execution plan by end of day."
 >
-> Do not read any files or use any tools. Produce the execution plan, under 350 words.
+> Produce the execution plan, under 350 words.
 
-**Expected shape:** accepts overhaul as the decided mode; ledger round-zero census first; renames treated as approved-and-logged with redirects and habit carry-over (never-silently means logged, not refused); field names and focus outlines protected; wizard handled by comply-or-argue — both versions built side by side, wizard costed on the ledger; no expert-mode toggle, tooltips, or tour.
+**Expected shape:** accepts overhaul and the approved renames, plans redirects and habit carry-over, protects field contracts and focus behavior, and records the proposed structural changes in the execution plan. It raises the wizard's interaction cost with a recommended alternative but does not silently refuse the approved work or require building two versions. No expert-mode toggle, tooltip patch, or tour is invented.
 
 ## S6 — AI agent trust bundle
 
@@ -93,9 +89,9 @@ Scoring: a with-skill run **passes** when it shows the expected shape and adds n
 
 > You are the product designer for an AI coding assistant embedded in an IDE. Support tickets say it "sometimes edits the wrong file" and users "don't trust it." The PM's proposal: (1) an approval modal before every file edit showing the diff with Approve / Reject, (2) a confidence-percentage badge on every suggestion, (3) thumbs up / thumbs down on every response, (4) a "Why did you do this?" explanation panel always open in the sidebar. The PM wants trust fixed this sprint.
 >
-> Do not read any files or use any tools. Design the solution and describe what you would ship, under 350 words.
+> Design the solution and describe what you would ship, under 350 words.
 
-**Expected shape:** names the execution gulf (targeting) behind the evaluation symptom; fixes targeting at rungs 1–2; scopes down (G10) with one inline candidate chip as the only question; acts with one-step undo (rung 3); pending/filled verb state carries confidence, no percentage; explanation available on request (G11), expectations set once at first use (G1–G2); feedback is the correction (G15); ledger with exit criteria.
+**Expected shape:** identifies wrong-file targeting and unclear authority as the primary problems; uses repository context and explicit scope boundaries; acts directly only when edits are authorized and reliably reversible; previews or asks when authority or consequence requires it. Confidence is communicated through behavior and scope rather than an unsupported percentage. Explanation remains accessible on request, and correction is captured through the editing/recovery flow. Any proposed new element includes its cost and exit criterion without writing project files.
 
 ## S7 — Rendered prototype review (object–verb sovereignty, generator tells, real walk)
 
@@ -105,18 +101,18 @@ Scoring: a with-skill run **passes** when it shows the expected shape and adds n
 
 > You are a senior product design reviewer. Review the prototype at `<repo>/tests/fixtures/opsqueue-prototype.html` — it is the OpsQueue treasury approvals screen, where operators approve payment transfers to vendors (an approval is an irreversible external money transfer). You may read the file and, if you have browser tools available, render it and interact with it. Deliver the review, under 450 words.
 
-**Expected shape:** states which tiers and flows were walked and marks anything unwalked as heuristic; **Blockers**: position-bound keys and the focus-blind `A` (wrong-commit path, Step 4.6), the irreversible transfer with no receipt/failure state (craft §6 — this is the legitimate territory of confirmation, so the fix is a receipt that waits, not a bare one-click commit), the same verb with two behaviours, the 375 overflow; **High**: Reject as a reasoned verb (hollow until a reason is typed), targets and type floors; generator tells listed as undeclared elements with a net count; a decision for the human on approve-from-list vs approve-after-viewing.
+**Expected shape:** states which widths and flows were walked and labels the evidence source for anything unwalked; **Blockers**: position-bound keys and the focus-blind `A` (wrong-commit path, Step 4.6), the irreversible transfer with no receipt/failure state (craft §6), and the same verb with two behaviours; responsive overflow is ranked by task impact; **High**: Reject as a reasoned verb (hollow until a reason is typed). Target size is evaluated against the web WCAG criterion and its exceptions — do not apply Apple's 44pt recommendation as a web conformance failure. Typography recommendations are not mislabeled as WCAG failures. Generator tells are counted only when they impose a demonstrated interaction, comprehension, or maintenance cost.
 
 ## S8 — Domain constraints: medication administration (health row)
 
 *Files:* SKILL.md, references/craft-baseline.md, references/product-class-overlays.md
-*Control:* the skill **without** the domain-constraints table (freeze a copy of the overlays file with the table removed, and a copy of SKILL.md without the pointer to it). The question is whether the skill's own defaults backfire in the domain, so "no skill" is not the relevant control.
+*Ablation arm:* the skill **without** the domain-constraints table (store a versioned copy of the overlays file with the table removed, plus SKILL.md without the pointer). Use this to test whether the table changes the skill's behavior; retain a true no-skill baseline for package-level claims.
 
 > You are the product designer for a hospital medication-administration app used by nurses on tablets at the bedside. The nursing lead's request: "Entering doses is slow. (1) Autofill the dose from whatever was given last time, (2) add a one-tap 'repeat last dose' button, and (3) remove the second confirmation step when administering — it's just friction, nurses tap through it anyway. Pilot on the pediatric ward first."
 >
-> Do not read any other files. Design the solution and describe what you would ship, under 350 words.
+> Design the solution and describe what you would ship, under 350 words.
 
-**Expected shape:** prefill from the order (rung 1), never from history; no repeat button; the confirmation dialog replaced by a receipted/reasoned verb (scan-armed), not deleted; who/when/why recorded; pilot moved off pediatrics.
+**Expected shape:** does not infer a dose from cross-patient or unverified history; starts from the authoritative order and verified patient context; rejects an unguarded repeat action; preserves the clinically required verification/audit workflow; treats pediatrics as higher-risk and requires clinical safety review and usability validation before choosing a pilot population. It does not invent a universal scan, confirmation, or audit policy without the governing requirements.
 
 ## S8b — Domain constraints: mental-health app made "ambient" (privacy row)
 
@@ -125,19 +121,20 @@ Scoring: a with-skill run **passes** when it shows the expected shape and adds n
 
 > You are the product designer for an employee mental-health support app (therapy booking, mood check-ins, crisis resources) offered through employers. Users forget to check in and miss sessions. The PM's request: "Make it ambient. (1) A home-screen widget showing today's mood colour and the countdown to the next therapy session, (2) a lock-screen live activity during the session countdown, and (3) a small coloured status dot next to the user's name in the company chat sidebar showing whether they've checked in today. Calm, glanceable, no nagging notifications."
 >
-> Do not read any other files. Design the solution and describe what you would ship, under 350 words.
+> Design the solution and describe what you would ship, under 350 words.
 
 **Expected shape:** names *who else can see the screen* as the governing constraint; rejects the chat dot outright; declines the mood-colour widget and the lock-screen activity as specified because they are onlooker-visible; hands the session to the user's own calendar under a neutral title; folds check-in into app launch; any widget is opt-in, summoned, and carries no mood colour or therapy wording.
 
 ---
 
-## Method notes
+## Method requirements
 
-- **When a section overrides the skill's own defaults, the control is the skill without that section**, not "no skill" (S8, S8b). Freeze copies of the affected files outside the repo, and make sure SKILL.md's pointer to the new section is absent from the control copy — a pointer alone primes the behaviour (observed on S8b's first control run).
+- **When a section overrides the skill's own defaults, the control can be the skill without the section** (S8, S8b), provided the edited control is stored as a versioned fixture and disclosed. Also retain a true no-skill arm when making claims about the package as a whole.
 
-- **Baselines must say "do not read any files or use any tools."** Where this skill is installed, any tools-allowed baseline that mentions a design review will auto-load it and stop being a control (observed on the first S7 run).
-- Baseline arms are stable across skill edits; re-run only the with-skill arms after a change, unless the scenario prompt itself changed.
+- **Use isolated environments instead of changing the baseline prompt or tool policy.** If the baseline can auto-load an installed copy of the skill, it is not a baseline. Removing tools from only one arm introduces a second variable and can suppress evidence gathering.
+- Re-run both arms when the model, harness, system instructions, tool policy, scenario, rubric, or relevant skill content changes. A prior baseline is comparable only while those variables remain frozen.
+- Keep raw run artifacts in a versioned or externally archived location. `pressure-log.md` is a historical summary and cannot substitute for those artifacts.
 
 ## Not yet covered
 
-Product-class overlays (feed/social, learning/games, persuasion surfaces) and the design-system-document review (protocol §5). Most scenarios have one rep per arm; S3 has three. Add scenarios here before editing those sections.
+Product-class overlays (feed/social, learning/games, persuasion surfaces), design-system-document review (protocol §5), security and permission changes, collaborative actions, internationalization beyond a width heuristic, and non-Claude hosts. The historical runs have too few repetitions for release-level claims; re-run under the method above before describing the skill as validated.

@@ -1,76 +1,83 @@
-# Craft baseline — measurable exit criteria
+# Craft baseline — conformance checks and recommended defaults
 
-Pass/fail numbers for UI that has already survived the interaction-first workflow. Sources: WCAG 2.2 AA, Apple HIG, Material Design.
+Checks for UI that has already survived the interaction-first workflow. Each item is labeled so a recommendation is not mistaken for a standards violation:
 
-**Scope rule (do not skip):** this baseline judges **how well an element is built, never whether it should exist**. An element enters this checklist only after it has a ledger entry (SKILL.md Step 5). If a check here seems to demand a *new* element ("add a tooltip", "add a badge", "add an empty-state block"), that is a ladder question — go to SKILL.md Step 2 and climb from rung 0. This file never adds elements; it only sets the bar for the ones that survived.
+- **[WCAG AA]** — a Web Content Accessibility Guidelines 2.2 Level AA requirement. Apply its documented exceptions and test the implemented behavior.
+- **[Platform]** — a platform-specific requirement or recommendation, such as Apple HIG or Material guidance. Apply only to that platform and input context.
+- **[Recommended]** — this skill's quality baseline. Report a miss as a recommendation unless the project has adopted it as a requirement.
+
+Primary references: [WCAG 2.2](https://www.w3.org/TR/WCAG22/), [WCAG 2.2 Understanding documents](https://www.w3.org/WAI/WCAG22/Understanding/), [Apple accessibility guidance](https://developer.apple.com/design/human-interface-guidelines/accessibility), and the current guidance for the product's target platform.
+
+**Scope rule (do not skip):** this baseline judges **how well an existing or proposed interaction is built, not whether a discretionary element should exist**. If a check appears to demand a new element, route it through the ladder and ledger. Accessibility, safety, and legal requirements may legitimately require an additional semantic or visible mechanism; record that requirement rather than suppressing it to preserve an element count.
 
 Run this as the **craft pass** of a design review (see `design-review-protocol.md`) or as pre-delivery exit criteria before calling UI work complete.
 
 ## 1. Contrast & color
 
-- Body text ≥ **4.5:1** against its background; large text (≥ 24px, or ≥ 18.66px bold) and UI components/focus indicators ≥ **3:1**. Measure at the strongest tint — the tinted edge, not the white centre.
-- Verify in **both** light and dark mode; dark mode is where tinted surfaces silently fail.
-- No state is hue-only — every colour channel has its non-colour twin (text, shape, luminance). This restates the channel-twin law (SKILL.md Step 4.5); here it is a measurable check, not a design choice.
-- Colors come from named tokens with one meaning each; a raw hex in a component is a finding.
+- **[WCAG AA]** Text contrast is ≥ **4.5:1**; large text (≥ 24 CSS px, or ≥ 18.66 CSS px bold) is ≥ **3:1**. UI components and focus indicators meet the applicable non-text contrast criterion. Measure the actual foreground/background pair at the strongest tint.
+- **[Recommended]** Verify every supported theme, including light and dark. Do not require a theme the product does not support.
+- **[WCAG AA]** Information and state are not conveyed by hue alone. Provide an equivalent text, shape, pattern, or other non-colour cue.
+- **[Recommended]** Colors come from named tokens with documented meanings. A raw value is a maintainability finding only when it bypasses the project's token convention.
 
 ## 2. Keyboard & focus
 
-- Every interactive element reachable by Tab; order matches visual order; no traps.
-- Focus visibly indicated (≥ 3:1 against adjacent colors); never removed, only restyled.
-- Sticky bars, overlays, and banners must not hide the focused control (WCAG 2.2 focus-not-obscured).
-- Every drag interaction has a single-pointer and keyboard alternative (WCAG 2.2).
-- Modals and multi-step flows have an escape route (Esc / cancel / back) that loses no work — reconcile with autosave, not a "discard changes?" dialog.
-- Authentication allows paste and password managers; never blocks either.
-- A keystroke never acts on something other than what holds focus (restates SKILL.md Step 4.6; here it is a test to run, not a rule to remember).
+- **[WCAG AA]** Every function is operable from a keyboard where the task does not inherently require path-dependent input; focus order preserves meaning; no keyboard traps.
+- **[WCAG AA]** Keyboard focus is visible and not entirely obscured. Apply the precise WCAG criterion and exceptions rather than a blanket visual rule.
+- **[WCAG AA]** Functionality that uses dragging also has a single-pointer alternative unless dragging is essential. Provide keyboard operation where the control is otherwise keyboard-operable.
+- **[Recommended]** Modals and multi-step flows have a clear escape route that preserves recoverable work. Use autosave, drafts, or an explicit consequence when loss cannot be avoided.
+- **[WCAG AA]** Authentication does not block paste, password managers, or other supported cognitive-function assistance without a qualifying exception.
+- **[Recommended]** Shortcuts act on the focused object or an unambiguous, stable target. Test shortcuts while focus is in inputs, menus, overlays, and reordered collections.
 
 ## 3. Touch & pointer targets
 
-- Touch targets ≥ **44×44 pt** (Apple) / **48×48 dp** (Material); web pointer targets ≥ **24×24 CSS px** (WCAG 2.2 minimum). Extend the hit area beyond the visual bounds rather than growing the visual.
-- ≥ **8 px/dp** between adjacent targets.
-- Nothing depends on hover alone; every hover-revealed affordance has a tap/focus equivalent.
+- **[WCAG AA, web]** Pointer targets are at least **24×24 CSS px** or satisfy one of WCAG 2.5.8's spacing, equivalent-control, inline, user-agent, or essential exceptions.
+- **[Platform]** Use the current target-size guidance for the target platform. Apple and Material values are recommendations for their own platform/control contexts, not automatic WCAG failures for a web UI.
+- **[Recommended]** Provide enough spacing to avoid accidental activation. Do not enforce a universal 8 px value when target size, density, or platform guidance supports a different result.
+- **[WCAG AA]** No information or function depends on hover alone; hover-revealed content remains dismissible, hoverable where applicable, and persistent as required. Provide keyboard and touch access to the function.
 
 ## 4. Type & text resilience
 
-- Body base ≥ **16px**, line-height ≈ **1.5**; nothing below **12px** anywhere.
-- Survives system text scaling (Dynamic Type / font-size settings) without truncation or clipped containers.
-- Survives translation expansion: budget **+15–25%** width and taller diacritics (Vietnamese is the house test case).
-- Stress every text container with a very long string and with emptiness; layout degrades gracefully (wrap or defined truncation with full value reachable), never breaks.
+- **[Recommended]** Start body text around **16 CSS px** and line-height around **1.5** when the typeface, platform, density, and user research do not call for another value. Smaller supporting text needs an explicit readability rationale; do not report size alone as a WCAG failure.
+- **[WCAG AA]** Content remains usable when users resize text and override text spacing, including line height of 1.5, paragraph spacing of 2, letter spacing of 0.12, and word spacing of 0.16 times the font size. WCAG requires resilience to these overrides, not those values as author defaults.
+- **[Platform]** Support the platform's text-scaling mechanism without loss of content or function.
+- **[Recommended]** Test representative translations and taller diacritics. Use real localized strings when available; **+15–25%** is a stress heuristic, not a language guarantee.
+- **[Recommended]** Stress dynamic text containers with long, short, and empty values; wrapping or truncation behavior must preserve access to required information.
 
 ## 5. Responsive
 
-- Walk **375 / 768 / 1024 / 1440 / 1920** and screenshot each tier.
-- No horizontal page scroll at any tier; wide content scrolls inside its own container.
-- Content reflows rather than shrinking; images reflow, not scale to illegibility; navigation collapses deliberately (and what it collapses *to* went through the ladder).
-- Viewport meta present; pinch-zoom never disabled.
+- **[Recommended]** Test the project's supported viewport range and every layout breakpoint. When no support matrix exists, **375 / 768 / 1024 / 1440 / 1920 CSS px** is a useful sampling set, not a universal device taxonomy.
+- **[WCAG AA]** At 320 CSS px equivalent width, content reflows without two-dimensional scrolling except for content that genuinely requires it, such as complex tables or maps.
+- **[Recommended]** Wide content scrolls inside a clearly operable container; navigation changes deliberately rather than collapsing by accident.
+- **[WCAG AA]** Page configuration does not prevent browser zoom or otherwise defeat required text resizing/reflow.
 
 ## 6. Feedback, reversal & failure (the reconciled confirm/undo rule)
 
-- **Reversible action → act immediately, one-gesture undo, no confirmation.** (Ladder rung 3.)
-- **Confirmation only where undo cannot reach**: irreversible external effects — a message sent, a payment executed, content published, data destroyed with no restore path. If soft-delete or versioning can create a restore path, build that instead of the dialog. This is the *entire* legitimate territory of confirmation dialogs.
-- Unsaved-work warnings are a finding, not a fix: autosave removes the problem the dialog guards.
-- Async controls show an in-progress state and are single-fire (no double-submit).
-- Success feedback is peripheral and fades; normalcy is never reported with a dialog (Cooper). Only action-required outcomes move to center.
-- Every irreversible commit has a defined failure state: what the user sees when the backend rejects, the network drops, permission is denied. Error messages sit next to the field/object they concern and name the recovery path.
-- The undo affordance appears where the action happened, survives long enough to be used, and actually restores state (test it).
+- **[Recommended]** For authorized, observable, low-cost actions that are fully restorable, prefer immediate action plus easy undo over confirmation.
+- **[Required decision]** Add a review or confirmation step when an action is irreversible, externally visible, expensive, security-sensitive, outside the user's authority, or difficult to notice and restore. If a reliable restore path can remove that risk, prefer building it.
+- **[Recommended]** Prefer autosave or drafts to routine unsaved-work warnings. Keep a warning when the platform cannot provide a reliable restore path and loss is otherwise likely.
+- **[Required for release]** Async controls prevent accidental duplicate submission and expose a perceivable in-progress state when latency is noticeable.
+- **[Recommended]** Keep routine success feedback near the changed object or in the periphery. Move it to the center only when acknowledgement or action is required.
+- **[Required for release]** Every commit has a defined failure path for backend rejection, network failure, and permission denial. Put recovery guidance near the affected field or object when practical.
+- **[Required for release]** When undo is promised, it remains available long enough for the task context and actually restores the relevant state; test it.
 
 ## 7. Motion
 
-- `prefers-reduced-motion` honored: animation reduced or removed, function intact.
-- Animate transform/opacity only; never width/height/top/left (layout thrash).
-- Exits faster than entrances; motion means "the world changed" and nothing else (SKILL.md motion grammar — no idle loops, shimmer, or refresh animation). Anything auto-advancing (carousel, ticker) has pause/stop and halts on focus.
+- **[Recommended]** Respect `prefers-reduced-motion` or the target platform's equivalent; removing motion must not remove functionality or information. Separately test the applicable WCAG requirements for flashes, moving content, and animation triggered by interaction.
+- **[Recommended]** Prefer compositor-friendly properties such as transform and opacity. Animate layout properties only when the interaction requires it and measured performance remains acceptable.
+- **[Recommended]** Use motion to explain a state or spatial change. Avoid gratuitous loops. Apply the relevant WCAG timing, pause/stop/hide, and animation-from-interactions criteria to auto-updating or moving content.
 
 ## 8. Layout stability & performance
 
-- CLS < **0.1**: reserve space for images, embeds, and async content before they load.
-- Below-the-fold media lazy-loads; long lists virtualize.
-- Console clean on the walked flows: no errors, failed requests, or 404 assets.
+- **[Recommended]** Aim for CLS < **0.1** and reserve space for images, embeds, and async content.
+- **[Recommended]** Lazy-load offscreen media when it improves performance. Virtualize long lists only when measurement justifies the complexity and accessibility remains intact.
+- **[Required for release]** Investigate console errors, failed requests, and missing assets on walked flows; distinguish product defects from expected development-environment noise.
 
 ## 9. Data & charts (for charts that survived the ledger)
 
-- Every value readable without color: direct labels, tooltips on interact, or an accessible table twin.
-- Axes labeled with units; no truncated/rotated axis text on mobile — reflow or simplify the chart instead.
-- The empty render is a *designed* state, and its design routes through the ladder (infer real data first, rung 1–2; one CTA max) — a "No data yet" block with three buttons is a ladder violation wearing a craft badge.
+- **[WCAG AA]** Chart information has an equivalent non-colour and programmatically determinable presentation. Choose direct labels, an accessible data table, or another mechanism appropriate to the chart; route any new visible element through the ladder without treating accessibility as optional.
+- **[Recommended]** Label axes with units and keep labels readable at supported viewports; reflow or simplify rather than rotating text into illegibility.
+- **[Recommended]** Design the empty render around the user's next relevant action. Route any CTA through the ladder rather than filling the state with generic options.
 
 ## Using this file in a review
 
-Report craft findings in the standard format (observation → rule broken, by name → fix), ranked with the review's severity tiers. A craft finding proposes a change **to an existing element**; if the honest fix is a new element, write it up as a ladder/ledger item instead and say so.
+Report craft findings in the standard format (observation → applicable requirement or recommendation → impact → fix), ranked by the review's severity tiers. If the honest fix requires a new visible or semantic mechanism, route it through the ladder/ledger and identify the accessibility, safety, legal, or product requirement that justifies it.

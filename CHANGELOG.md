@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.5.0 — 2026-09-03
+
+- Narrowed automatic routing to interaction behavior, explicit UX/design audits, agent-initiated actions, and high-stakes UI; visual-only and routine implementation work no longer trigger the skill.
+- Added scope and authority rules: reviews are read-only by default, design documentation is created only when authorized, and stakeholder/platform decisions are preserved unless a concrete risk needs to be raised.
+- Reframed one-question, undo, mode, explanation, and monotony rules as decision criteria with explicit permission, safety, accessibility, and input-modality boundaries.
+- Corrected the craft baseline by separating WCAG 2.2 AA requirements, platform guidance, and house recommendations. Removed the false implication that 44pt targets or 16px body text are universal web conformance gates.
+- Replaced the "property costs 0" shortcut with separate discrete-element and perceptual/accessibility costs.
+- Reworked evaluation guidance around isolated arms, identical tool policies, retained raw artifacts, repeated runs, and disclosed doctrine-adherence scoring. Historical pressure runs are now explicitly qualified.
+- Fixed manual installation instructions and changed the plugin skill path from `.` to `./` for compatibility with older Claude Code versions.
+- Added an explicit no-license notice without choosing a license on the owner's behalf.
+
 ## 0.4.1 — 2026-09-03
 
 - `references/product-class-overlays.md`: "Domain constraints that move the ladder" — eight domains (money movement, health & safety, public sector, regulated consent, safety-critical operations, children's products, privacy-sensitive surfaces, shared devices), each naming the skill default it overrides and what applies instead. The interaction-level answer to industry-specific rules: it changes the rung, never the palette.

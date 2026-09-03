@@ -1,6 +1,6 @@
 {
   "name": "interaction-first-design",
-  "description": "Interaction-first UI/UX design skill for Claude Code: the Ladder of Least Interface, the element ledger, a measurable craft baseline, and evidence-based design review.",
+  "description": "Interaction-design skill for Claude Code with scoped UX review, state and action modeling, accessibility checks, and evidence-based evaluation.",
   "owner": {
     "name": "tad-agentics",
     "url": "https://github.com/tad-agentics"
@@ -12,7 +12,7 @@
         "source": "github",
         "repo": "tad-agentics/Interaction-Design-Skill"
       },
-      "description": "Interaction-first UI/UX design skill: solve problems with interactions, pay for every element, review with evidence."
+      "description": "Design and review interaction behavior, high-stakes actions, and agent-initiated UI without expanding the user's scope."
     }
   ]
 }

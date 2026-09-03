@@ -1,9 +1,18 @@
 ---
 name: interaction-first-design
-description: Use when creating, modifying, redesigning, reviewing, or prototyping any UI — screens, components, flows, onboarding, settings, empty states, notifications, dashboards, forms, design systems — in Claude Code, Cursor, Claude Design, or any frontend task. Use even when the request is as small as "add a button/toggle/badge/modal/tooltip", "fix this UX", "users are confused", "make it feel modern", or "give me a mockup". Use for every DESIGN REVIEW of a screen, prototype, or design system (including output from design agents), for craft and accessibility QA (WCAG, contrast, touch targets, keyboard, responsive layout, typography, motion), for visual state systems (colour/glow/motion/urgency), for element ledgers across design rounds, for redesigns of products people already use, and whenever an AI agent acts on the user's behalf (approvals, confidence, feedback, clarifying questions).
+description: Design or review interaction behavior in user flows, state and feedback systems, irreversible or agent-initiated actions, and high-stakes UI. Use for explicit UX/design audits and when a frontend change materially alters how a person acts or understands system state. Do not invoke for visual-only styling, copy-only edits, or routine component implementation whose interaction semantics are unchanged.
 ---
 
 # Interaction-first design
+
+## Scope and authority
+
+Use this skill to improve the requested artifact, not to replace the user's brief or expand the assignment.
+
+- In a **review**, inspect and report. Do not edit product files or create design documentation unless the user asks for changes.
+- In an **implementation or redesign**, preserve the chosen platform, design system, product constraints, and explicit stakeholder decisions. Raise a concise objection when a requested pattern creates a concrete usability, accessibility, safety, or compliance risk; otherwise execute the request.
+- Treat the principles below as decision criteria. Absolute language is reserved for accessibility, safety, permissions, and other testable invariants. Product conventions and user research outrank a generic preference in this skill.
+- Ask only for information that would materially change the result. Prefer one focused question when possible, but do not guess through unresolved safety, legal, permission, identity, or irreversible-action decisions.
 
 ## The failure mode this skill exists to stop
 
@@ -18,24 +27,24 @@ This skill makes that stance the default operating procedure. Interface design i
 1. **The unit of design is the interaction, not the widget.** An interaction is a loop: user intent → action → system response → user evaluates → next intent. Design the loop; the widget is whatever the loop needs, often nothing new.
 2. **Every element is debt.** It costs attention (Hick's law), motor effort (Fitts's law), learning, and permanent screen real estate. It must earn its place by closing a gulf that nothing cheaper can close.
 3. **Inference before interaction.** Read the environment and history before asking the user. Asking is the most expensive move available.
-4. **Act, then let people correct — never make them ask permission for reversible things.** Undo beats confirm. Scoped defaults beat questions.
+4. **Prefer action plus correction when the action is authorized, observable, inexpensive, and genuinely reversible.** Undo usually beats confirmation in that territory. Ask or present a review step when authority is unclear or consequences escape the product's restore path.
 5. **Periphery before center.** Status belongs in the periphery (calm) and moves to the center only when action is needed.
-6. **Modes are bugs.** Same input must produce the same result. If you need a mode, make it a quasimode (held, not toggled).
-7. **Habit is the goal.** Interfaces are used hundreds of times; the design target is the thousandth use, not the first.
+6. **Hidden modes are error-prone.** Keep state visible and inputs predictable. When a mode is necessary, prefer an explicit state or a quasimode (held, not toggled), and test habit-driven errors.
+7. **Support durable habits on recurring product surfaces.** Balance the thousandth use with learnability, accessibility, and the actual frequency of the task.
 
 ## Precedence — three layers, in order
 
 Every UI decision passes through three layers, and the order is not negotiable:
 
 1. **Existence** — does the element exist at all? Decided by the ladder (Step 2) and paid for in the ledger (Step 5). Nothing below this layer can create an element.
-2. **Quality** — is the surviving element built to standard? Decided by `references/craft-baseline.md` (contrast, touch targets, keyboard, type resilience, responsive tiers, reversal, motion). A craft check that seems to demand a *new* element is a ladder question in disguise — send it back to layer 1.
+2. **Quality** — is the surviving interaction built to standard? Decided by `references/craft-baseline.md`, which separates WCAG requirements, platform guidance, and recommendations. If quality requires a new mechanism, route it through layer 1 without treating accessibility, safety, or law as optional.
 3. **Style** — visual direction (palette, typography voice, effects, signature aesthetics). Chosen last, applied to interactions that already work. A style system generated before the interaction spec exists is decoration looking for a product.
 
 One consequence worth stating plainly: for **conversion surfaces** (landing/marketing pages, first-contact flows) style may legitimately optimize the first impression; for **product surfaces** (the tool someone uses daily) the thousandth-use rules above win every conflict between the layers.
 
-## Workflow — run this BEFORE writing UI code or drawing a screen
+## Workflow — run this before materially changing interaction behavior
 
-Do not skip to implementation. The whole value of this skill is in steps 1–2; steps 3–5 keep the result honest.
+Scale the workflow to the change. A small interaction may need a few sentences; a new flow or high-stakes action needs the full specification. Do not turn the workflow itself into unnecessary project ceremony.
 
 ### Step 1 — Name the goal and the gulf
 
@@ -50,7 +59,7 @@ Most "add a button" requests are gulf-of-execution problems that get patched wit
 
 Add one more sentence: **distance and attention** (Herigstad). How far away is the person and how much attention do they have — one foot and focused (phone), two feet and working (laptop), ten feet and relaxed (TV, shared), passing by (public screen, glanceable)? This sets the element budget before you design anything: the further away or the less attentive, the fewer things can be on screen and the more must be inferred or curated.
 
-The same discipline applies to your own questions to the user. If the brief is ambiguous, ask exactly one question, with choices, and only when your possible reads genuinely diverge; otherwise state your read in one sentence and proceed. A multi-question intake is rung-6 interface imposed on the person you are designing for. If the artifact is an existing product that users already rely on, the one question is the redesign mode — see `references/design-review-protocol.md` §3.
+The same discipline applies to your own questions to the user. If the brief is ambiguous, ask the smallest set of focused questions whose answers would materially change the result; offer choices when they clarify the trade-off. Otherwise state your read in one sentence and proceed. If the artifact is an existing product that users already rely on, establish the redesign mode before changing habits — see `references/design-review-protocol.md` §3.
 
 ### Step 2 — Climb the Ladder of Least Interface
 
@@ -59,18 +68,18 @@ Start at rung 0. Stop at the first rung that closes the gulf. Only reach a highe
 | Rung | Move | Source |
 |---|---|---|
 | 0 | **Eliminate.** Remove the need. The problem is excise (work the software imposes, not the goal demands). Better default, remove the step, remove the feature. | Cooper (excise), Raskin |
-| 1 | **Infer from environment.** Location, time, device, current selection, viewport, what's on screen, what's in the clipboard. Show what's relevant *now*. | Victor (Magic Ink), Amershi G4 |
-| 2 | **Infer from history.** Last value used, most frequent choice, this user's pattern, what they did last session. Never start from zero. | Victor, Saffer ("bring the data forward"), Amershi G12–13 |
-| 3 | **Act automatically with cheap undo.** Do the probable thing, show what you did, make reversal one gesture. Autosave, not save. Auto-correct with revert, not a dialog. | Cooper ("ask forgiveness, not permission"), Horvitz (act/ask/wait thresholds) |
-| 4 | **Fold into an existing interaction.** Put the action on the object itself: sortable column header, drag-to-reorder, tap the number to edit it, long-press for detail. Direct manipulation on the thing, not a control about the thing. | Shneiderman, Hutchins/Hollan/Norman (direct engagement) |
+| 1 | **Infer from environment.** Use authorized, relevant context such as device, current selection, viewport, or what's on screen. Do not infer across identity, privacy, or permission boundaries. | Victor (Magic Ink), Amershi G4 |
+| 2 | **Infer from history.** Reuse prior choices only when identity is known, retention is appropriate, and the context is stable. | Victor, Saffer ("bring the data forward"), Amershi G12–13 |
+| 3 | **Act automatically with cheap undo.** When authority is clear and the effect is observable and fully restorable, do the probable thing and make reversal easy. | Cooper ("ask forgiveness, not permission"), Horvitz (act/ask/wait thresholds) |
+| 4 | **Fold into an existing interaction.** Put the action on the object itself when the affordance remains discoverable and has accessible input alternatives: sortable column header, drag-to-reorder plus keyboard controls, tap the number to edit it. | Shneiderman, Hutchins/Hollan/Norman (direct engagement) |
 | 5 | **Disclose progressively.** Show the primary path only; reveal secondary options on request, in context, near the trigger. Not a new persistent element — a conditional one. | Nielsen (progressive disclosure), Cooper ("design for the probable, provide for the possible") |
-| 5.5 | **Assign the meaning to a channel.** Give the fact to an unclaimed *continuous property of a surface that already exists* — position, luminance (tone), heat (a background tint), gradient fill, glow. A property costs 0 elements; see "Channel physics" below. | v4 practice; Weiser (periphery) |
+| 5.5 | **Assign the meaning to a channel.** Give the fact to an unclaimed property of a surface that already exists — position, luminance, tint, fill, or motion. This adds no discrete element but still spends perceptual and accessibility budget; see "Channel physics" below. | v4 practice; Weiser (periphery) |
 | 6 | **Add a new element.** Last resort. Now go to Step 5 and pay for it. | — |
 
 Two rules while climbing:
 
-- **A question to the user is rung 6, not rung 1.** Forms, wizards, confirmation dialogs, "which one did you mean?" prompts, onboarding surveys — all are new interface. Use them only when inference and scoped defaults both fail *and* the cost of a wrong guess is high (Horvitz: dialog sits between inaction and action on the expected-utility curve; it is justified only when the guess is uncertain and the error is expensive).
-- **Explanatory UI is a smell.** If you are adding text, a tooltip, a badge, or a help panel to explain how something works, the interaction itself is wrong. Fix the mapping or the feedback instead (Norman). Exception: AI systems must set expectations about what they can do and how well — see the AI section.
+- **A question to the user is a high-cost interaction.** Forms, wizards, confirmation dialogs, and onboarding surveys add work. Use them when inference and scoped defaults fail and a wrong guess would be expensive, unauthorized, or difficult to notice.
+- **Explanatory UI can signal a mapping problem.** First try to fix the label, mapping, constraints, or feedback. Keep explanation when the domain is inherently complex, disclosure is required, accessibility needs it, or an AI system must set expectations.
 
 ### Step 3 — Design the interaction, not the widget
 
@@ -92,7 +101,7 @@ For the interaction you chose, specify it with Verplank's three questions and Sa
 Check the chosen interaction against these. Any "no" sends you back to Step 2.
 
 - **Modeless.** Same input → same output regardless of hidden state.
-- **Monotonous** (Raskin's sense): one way to do each thing, so habits form. Do not add a second path "for discoverability."
+- **Conceptually monotonous** (Raskin's sense): one stable action model for each task, so habits form. Multiple input modalities — pointer, keyboard, touch, assistive technology — are accessible equivalents, not competing task paths.
 - **Reversible.** Any action cheaper than a confirmation is reversible by one gesture.
 - **Direct.** The user manipulates the object of interest, not a proxy or a conversation about it.
 - **Calm.** Ongoing status lives in the periphery (subtle, ambient, glanceable) and only moves to the center when the user must act.
@@ -109,7 +118,7 @@ When many objects carry state (queues, dashboards, lists, monitors), do not enco
 - **Gradient fill** = progress, in exactly one place. Never decoration.
 - **Glow + motion** = attention. At most one attention glow per screen, on the one object a single confirming gesture can act on. Motion means "the world changed" — arrival, commit, reversal, escalation — and nothing else; no idle loops, shimmer, pulses, or animation on data refresh.
 
-Two laws make this honest. **A property costs 0; a signal costs 1**: a background tint on an existing card adds nothing to the ledger, but an outline that emits light is a signal and counts — the test is whether it exists as a thing the eye must parse separately. **Every colour channel needs a non-colour twin** (text, shape, or luminance) so no state is hue-only.
+Two rules make this honest. **A property adds 0 discrete elements but still has a channel cost**: record what a tint, position, or motion means and test whether people can perceive and interpret it. A separate outline, glyph, or glow is also a discrete signal and counts as an element. **Every colour channel needs a non-colour twin** (text, shape, or luminance) so no state is hue-only.
 
 ### Step 4.6 — Object–verb sovereignty (for any product where users commit actions)
 
@@ -135,13 +144,13 @@ Exit criteria: <what would let us remove it later>
 The ledger is a *living document across rounds*, not a one-shot form. Rules that keep it honest:
 
 - **Additions are declared, always** — icons, outlines, chips, plates, hint lines. A ledger that lists only removals is not a ledger; "small" and "decorative" are how creep enters.
-- **A signal counts even if it decorates.** Anything the eye must parse separately (a ring, a glyph, a glow) is +1; a property of an existing surface (a tint, an ordering, a tone) is 0.
+- **A signal counts even if it decorates.** Anything the eye must parse separately (a ring, a glyph, a glow) is +1. A property of an existing surface adds 0 discrete elements, but its semantic, perceptual, privacy, and accessibility costs still belong in the ledger.
 - **Corrections are logged in place**, not silently fixed ("logged as 0 for three rounds — that was wrong — +1 while it existed, now removed, back to 0"). The ledger's value is that it can be audited.
 - **Restyles net zero.** A visual refresh that adds a glyph is a failed restyle.
 - **Live prototypes carry ledgers like any frame.** Builds are where undeclared elements leak in.
 - Aim for net-zero or net-negative element count per change; if a feature genuinely needs three new elements, the design is probably wrong at rung 0.
 
-**Persistence.** The ledger lives at `design/LEDGER.md` in the project root (page- or module-specific ledgers under `design/pages/<name>.md`, overriding the master for that surface only). Before any design round: read the existing ledger first; entries in it are prior decisions, not suggestions. Never overwrite or regenerate a ledger that exists — append entries and log corrections in place. If no ledger exists, create one with the current element census as round zero.
+**Persistence.** If the project already uses a ledger, read it before an authorized design change and append rather than regenerate it. The default path is `design/LEDGER.md`, with page-specific records under `design/pages/<name>.md`. Create a new ledger only when the user requests one, the repository establishes it as a convention, or the implementation includes ongoing design governance. For review-only work, report the census and proposed entries in the response; do not write files.
 
 ## When the product contains an AI agent
 
@@ -151,7 +160,7 @@ Apply Horvitz's three-way decision at every agent action point, in this order:
 
 1. **Act** when confidence is high and the cost of being wrong is low or fully reversible. Show what was done, in place, with one-gesture undo. No confirmation.
 2. **Scope down** when uncertain: do the part you are sure of, leave the rest positioned for the user to finish. Horvitz's Lookout example: if it cannot find the meeting time, it opens the right week of the calendar instead of guessing or asking. "Doing less but doing it correctly."
-3. **Ask** only when the guess is uncertain *and* wrong is expensive. Ask with choices, not open questions (Cooper: "provide choices; don't ask questions"). One question, inline, dismissible by ignoring it.
+3. **Ask** when the guess is uncertain and wrong is expensive, unauthorized, or hard to detect. Prefer a focused choice when the valid options are known; use an open question when it would be unsafe to invent the options.
 4. **Wait** when the person is mid-flow and the service is not urgent. Time to attention, not to availability (Horvitz, Amershi G3).
 
 The Microsoft guidelines that most reduce interface (full set in `references/ai-agent-interaction.md`):
@@ -185,7 +194,7 @@ Reversal: <the undo gesture>
 Elements added: <list or "none">   Elements removed: <list>
 ```
 
-In Claude Code / Cursor: put this as a comment block at the top of the component or in the PR description, then implement it. In Claude Design: put it in the frame notes and make the mockup show the *loop* (before, during, after states), not just the resting screen.
+In Claude Code / Cursor, put this in the PR description, design notes, or another repository-approved location. Add a component comment only when the project convention or user requests it. In Claude Design, put it in the frame notes and make the mockup show the *loop* (before, during, after states), not just the resting screen.
 
 ### Design review output
 
@@ -208,16 +217,16 @@ Eight request → element-first → interaction-first walkthroughs (sort, unsave
 
 | Smell | What it usually means | Fix |
 |---|---|---|
-| Tooltip/help text on a control | Mapping or label is wrong | Fix the mapping; rename; make the effect visible |
-| Confirmation dialog | Action isn't reversible | Make it reversible; show undo |
+| Tooltip/help text on a control | Mapping or label may be unclear | Fix the mapping first; retain accessible or domain-required explanation when needed |
+| Confirmation dialog | The action may lack a reliable restore path or clear authority | Make it reversible where practical; otherwise design a focused review step |
 | Badge/banner announcing state | Feedback is missing where the action happened | Put feedback on the object, in the periphery |
 | "Advanced" section that everyone opens | Wrong default | Change the default |
 | Wizard for a 3-field task | Excise dressed as guidance | One screen, inferred defaults |
 | Toggle that changes what other controls do | Mode | Remove, or quasimode |
 | Two ways to do the same thing | Discoverability patch | Keep one; fix its signifier |
-| Thumbs up/down on every AI output | Feedback channel bolted on | Let editing be the feedback |
-| Plan/steps viewer by default | Agent explaining instead of scoping | Act or scope down; explanation on request |
-| Empty state with N CTAs | Nothing inferred | Infer; one CTA max |
+| Thumbs up/down on every AI output | Feedback channel may be bolted on | Prefer correction as feedback; retain rating where correction cannot express quality |
+| Plan/steps viewer by default | Agent may be explaining instead of scoping | Act or scope down; show plans when requested or when review/approval is necessary |
+| Empty state with many unrelated CTAs | The next relevant action is unclear | Infer or prioritize the smallest useful set |
 
 ## Scope by product type
 
@@ -230,6 +239,6 @@ Read these when you need the underlying argument, the full guideline sets, or ci
 - `references/foundations.md` — the interaction-design canon: Norman's principles and the two gulfs, Hutchins/Hollan/Norman on directness, Verplank's Do/Feel/Know, Raskin's modes and habituation, Cooper's goal-directed principles and excise, Saffer's microinteraction anatomy, Nielsen's progressive disclosure, Bret Victor's Magic Ink, Weiser & Brown's calm technology, Krishna's NoUI principles, Herigstad's spatial/motion/distance practice. With source links.
 - `references/ai-agent-interaction.md` — Horvitz's 12 mixed-initiative principles, Microsoft's 18 Human-AI Interaction guidelines (titles with one-line glosses), Google PAIR guidebook structure, Nielsen's intent-based paradigm, and how each maps to reducing interface. With source links.
 - `references/design-review-protocol.md` — how to review design work (your own or a design agent's) across rounds: render-and-walk practice, viewport tiers, the craft pass, inheriting an existing UI (redesign mode, audit as ledger round zero, what never changes silently), the regression watchlist, self-limiting system rules, comply-or-argue collaboration, and the severity-ranked review output format. Read it whenever auditing screens, prototypes, or a design system.
-- `references/craft-baseline.md` — measurable exit criteria (WCAG 2.2 AA, Apple HIG, Material Design numbers) for elements that survived the ledger: contrast, keyboard and focus, touch targets, type resilience, responsive tiers, the confirm-vs-undo rule, motion, layout stability, charts. Read it for any craft/accessibility QA pass or before calling UI work delivery-ready. It judges quality only — it can never add an element.
+- `references/craft-baseline.md` — WCAG 2.2 AA checks, platform-specific guidance, and recommended defaults for contrast, keyboard and focus, targets, type resilience, responsive behavior, reversal, motion, layout stability, and charts. Read it for craft/accessibility QA or before calling UI work delivery-ready.
 - `references/worked-examples.md` — eight request → element-first → interaction-first walkthroughs with rungs and net element counts.
 - `references/product-class-overlays.md` — how the channel map and the definition of cost change for consumption/social products, learning/games/fitness, and persuasion surfaces; the overlay rule for new product classes; and the domain-constraints table (money, health, public sector, regulated consent, safety-critical, children, privacy-sensitive, shared devices) naming which rung each domain overrides.

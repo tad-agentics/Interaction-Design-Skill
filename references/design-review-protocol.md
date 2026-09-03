@@ -24,10 +24,10 @@ A design agent's notes describe intent; only the render shows what shipped. Ever
 - Walk the flows, don't just view the screens: open the object from *every* surface it appears on (queue, zoomed list, palette, chat card) and verify the same interaction results; fire the exception path; commit and check what the screen does afterwards.
 - Compare claims to pixels. If the notes say "auto-collapses on entry" or "net −1 per row," verify by walking; the most dangerous gap is a well-written note describing behaviour that isn't built.
 - Check ordered fixes from prior rounds one by one. Items silently dropped ("was ordered cut, still present") get listed by name; agents reliably apply the interesting fixes and shed the housekeeping.
-- Walk the responsive tiers — **375 / 768 / 1024 / 1440 / 1920** — and screenshot each. Horizontal scroll, clipped or overlapping content, and navigation that collapses by accident rather than design are findings at the tier where they appear.
+- Walk the product's supported viewport range and every declared breakpoint. If no support matrix exists, sample **375 / 768 / 1024 / 1440 / 1920 CSS px** and state that these are heuristic samples rather than a universal device taxonomy. Capture evidence at the widths where behavior changes or fails.
 - Stress the render: paste a very long string into every text container, load the empty case, and (for anything async) watch the loading state on a slow connection. A layout that only survives the demo data hasn't been reviewed.
 - Read the console on every walked flow. Errors, failed requests, and 404 assets are evidence and often explain a visual defect you already screenshotted.
-- **No finding without something the walk showed.** If the artifact could not be rendered, say so plainly and mark every remaining observation as heuristic (from reading code or notes) — never present an unrendered judgement as an observed one.
+- **Label the evidence source.** A rendered interaction can support an observed finding; code, accessibility-tree, design-note, or static-image inspection can support a source-based or heuristic finding. If the artifact could not be rendered, say so plainly. Never present an unwalked judgment as observed behavior, but do not discard valid source evidence merely because a flow was not rendered.
 
 ## 2. The craft pass
 
@@ -39,8 +39,8 @@ Scope discipline: the craft pass judges **quality of existing elements only**. I
 
 When the artifact is an existing product or site someone else built and users already rely on, round zero changes shape. Misclassifying the engagement is the biggest source of bad redesign work, so settle these before proposing anything:
 
-- **Detect the mode first.** *Preserve* (modernise without breaking brand or habits) or *overhaul* (new visual language over existing content and IA). If the brief doesn't say which, ask that one question, with the two choices — before any design work.
-- **The audit is ledger round zero.** Walk the existing artifact (Section 1) and take the census: every element with its rung and cost, the channel map as it currently stands, brand tokens (colors, type, radii, logo treatment), information architecture (page tree, slugs, primary nav, conversion paths), patterns that carry user habits, patterns to retire. Write that census into `design/LEDGER.md` as round zero. Existing elements are prior decisions to argue with, not a blank slate.
+- **Detect the mode first.** *Preserve* (modernise without breaking brand or habits) or *overhaul* (new visual language over existing content and IA). If the brief does not establish the mode and the difference would materially change the result, ask a focused question before changing the design.
+- **The audit can become ledger round zero.** Walk the existing artifact (Section 1) and take the census: every relevant element with its rung and cost, the channel map as it currently stands, brand tokens (colors, type, radii, logo treatment), information architecture (page tree, slugs, primary nav, conversion paths), patterns that carry user habits, patterns to retire. In review-only work, report the census without writing files. Persist it to `design/LEDGER.md` only when the user requests documentation, the repository already uses the ledger, or implementation has been authorized.
 - **Habits are load-bearing.** On inherited UI the thousandth use is already happening: muscle-memory positions, keyboard shortcuts, nav labels, field order. A removal still scores −1 on the ledger, but its entry must name the habit it disturbs and how users are carried across (same position, same keystroke, a transition period).
 - **Never change silently**: URL structure and slugs; primary nav labels; form field names and order (analytics and autofill depend on them); element IDs and events that tracking fires on; the logo or wordmark; legal, consent, and cookie copy; and existing accessibility wins — focus states, alt text, keyboard paths, and contrast never regress in a restyle. Each of these moves only with explicit approval, logged in the ledger.
 - **Stop when the brief is satisfied.** Work the levers from lowest risk upward — typography, spacing and rhythm, color recalibration onto the existing brand accent, then motion, then structural recomposition — and prefer targeted evolution over full redesign whenever IA and content are sound.
@@ -75,7 +75,7 @@ A design system is reviewed as an *operating constitution*, not a style sheet:
 
 ## 6. Self-limiting system rules
 
-The strongest systems constrain their own future. Look for (and add, if missing):
+The strongest systems constrain their own future. Look for these controls and recommend them when the review evidence justifies them; add them only when edits are in scope:
 
 - **Banned list and retired list**, with "do not reintroduce" — the retired list is the memory that stops patterns returning under new names.
 - **Exemption budget**: no new exemption without retiring one. Exemptions are where systems rot.
@@ -87,7 +87,7 @@ The strongest systems constrain their own future. Look for (and add, if missing)
 
 The best agent rounds are not the most obedient ones. Set the expectation explicitly, and review for it:
 
-- **Never silent deviation, never silent compliance.** If the agent believes a spec value is wrong (an alpha too low to see, a rule that starves an element of function), it says so, ships its recommendation *and* the spec'd version side by side, and lets the human pick. Deviating without saying so is a failed round even if the deviation is right.
+- **Never silent deviation.** If the agent believes a requested value creates a concrete defect, it says so and presents the requested and recommended options with their trade-off. Build both versions only when the user requests alternatives or comparison materially reduces risk; otherwise implement the authorized choice after surfacing the concern.
 - **Judgement calls are filed in writing**: what was decided, why, what it trades away — plus an *open questions* list of things the agent noticed but didn't decide. Review these first; they're where the thinking is.
 - **Corrections are logged, not buried.** When the agent (or reviewer) discovers a prior round was mis-counted or mis-ruled, the correction appears in the ledger/notes explicitly.
 - **The reviewer can be wrong.** When the agent's argument beats the instruction (e.g. a motion rule that violates "nothing moves unless the world changed"), the review says so and the doctrine updates. Ratify good unsolicited changes explicitly — an unratified improvement is a landmine for the next round.
@@ -98,7 +98,7 @@ The best agent rounds are not the most obedient ones. Set the expectation explic
 Lead with the verdict, in one sentence: **Ship / Ship with fixes / Needs work**, plus whether the round converged or drifted, and which viewports were walked. Then:
 
 1. **Ratify** — good changes (asked-for or not), named explicitly so they enter doctrine.
-2. **Violations / regressions** — each written as *observation → rule broken (by name) → fix*, with the evidence (screenshot, measured value, console line — what the walk showed, not what the notes said). Rank in four tiers: **Blocker** (wrong-commit paths, doctrine breaks, craft-baseline accessibility failures — gates shipping), **High** (fix before merge), **Medium** (noticeably better if fixed), **Nit** (prefixed "Nit:", never gates anything). Distinguish "broken" from "I'd prefer" — only Blockers and Highs gate.
+2. **Violations / regressions** — each written as *observation → applicable requirement or principle → impact → fix*, with its evidence source (render, interaction, accessibility tree, source, measured value, or console). Rank by user and release impact: **Blocker** (unsafe wrong-commit paths, data loss, critical task failure, or a confirmed release-gating legal/accessibility failure), **High** (material task or access failure to fix before merge), **Medium** (meaningful improvement or limited failure), **Nit** (preference or polish, never gates). A disagreement with this skill's doctrine is not itself a blocker.
 3. **Decisions for the human** — genuine trade-offs (axis purity vs control constancy, etc.) stated as a choice with a recommendation, not silently resolved.
 4. **The fix block** — a numbered, copy-paste instruction for the next round: fixes first, then new work, then what to deliver as proof. Keep ordered items checkable; next round begins by checking them.
 5. **Net element count** for the round.

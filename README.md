@@ -1,6 +1,6 @@
 # interaction-first-design
 
-A Claude Code skill for UI/UX and interaction design that makes "solve it with an interaction, not another interface element" the default operating procedure — and audits design work against that standard with evidence, measurable criteria, and a persistent element ledger.
+A Claude Code skill for UI/UX and interaction design that makes "solve it with an interaction, not another interface element" the default operating procedure — and audits interaction behavior with scoped evidence, standards-aware criteria, and an optional persistent element ledger.
 
 ## The problem it solves
 
@@ -14,11 +14,11 @@ Forty years of interaction-design research says the opposite: the interface is a
 
 1. The unit of design is the interaction, not the widget.
 2. Every element is debt — it must close a gulf nothing cheaper can close.
-3. Inference before interaction: read environment and history before asking the user.
-4. Act, then let people correct — undo beats confirm.
+3. Inference before interaction, within identity, privacy, and permission boundaries.
+4. For authorized and genuinely reversible actions, correction usually beats confirmation.
 5. Periphery before center — status stays calm until action is needed.
-6. Modes are bugs.
-7. Habit is the goal — design for the thousandth use, not the first.
+6. Hidden modes are error-prone; necessary modes must be explicit and habit-safe.
+7. Recurring product surfaces should support durable habits without sacrificing learnability or accessibility.
 
 ### Three-layer precedence
 
@@ -27,14 +27,14 @@ Every UI decision passes through three layers, in this order, and lower layers c
 | Layer | Question | Decided by |
 | --- | --- | --- |
 | **Existence** | Should this element exist at all? | The Ladder of Least Interface and the element ledger |
-| **Quality** | Is the surviving element built to standard? | The craft baseline — measurable WCAG 2.2 / HIG / Material criteria |
+| **Quality** | Is the surviving interaction built to standard? | The craft baseline — WCAG requirements, platform guidance, and recommendations kept distinct |
 | **Style** | What visual direction? | Chosen last, applied to interactions that already work |
 
 A craft check that seems to demand a new element is a ladder question in disguise. A style system generated before the interaction spec exists is decoration looking for a product.
 
 ### The workflow (runs before any code or mockup)
 
-1. **Name the goal and the gulf** — execution (can't see how to act) or evaluation (can't tell what happened) — plus the user's distance and attention. If the brief is ambiguous, ask exactly one question, with choices; otherwise declare your read and proceed.
+1. **Name the goal and the gulf** — execution (can't see how to act) or evaluation (can't tell what happened) — plus the user's distance and attention. Ask the smallest set of questions that would materially change the result; otherwise declare your read and proceed.
 2. **Climb the Ladder of Least Interface** — stop at the first rung that closes the gulf:
 
    | Rung | Move |
@@ -45,12 +45,12 @@ A craft check that seems to demand a new element is a ladder question in disguis
    | 3 | Act automatically with cheap undo |
    | 4 | Fold into an existing interaction (the action lives on the object) |
    | 5 | Disclose progressively, in context, on request |
-   | 5.5 | Assign the meaning to a channel — position, luminance, heat, glow — a property costs 0 elements |
+   | 5.5 | Assign meaning to an existing channel — no discrete element, but still a perceptual and accessibility cost |
    | 6 | Add a new element — last resort, paid for in the ledger |
 
 3. **Design the interaction, not the widget** — Verplank's Do / Feel / Know and Saffer's trigger / rules / feedback / loops, written as an interaction spec.
 4. **Apply the constraints** — modeless, monotonous, reversible, direct, calm, consistent, habit-safe — plus channel physics for products with recurring state and object–verb sovereignty for products where users commit actions.
-5. **Pay for every element** — a ledger entry for anything that reaches rung 6, persisted at `design/LEDGER.md` in the project: read before every round, appended to, corrections logged in place, never regenerated over.
+5. **Pay for every element** — record anything that reaches rung 6. Reuse an existing project ledger; create one only when requested or when ongoing design governance is part of the authorized work. Reviews report proposed entries without writing files.
 
 ### Worked example
 
@@ -62,9 +62,9 @@ Element-first: add a Sort dropdown. Interaction-first (rung 4): column headers a
 
 - **Creating and modifying UI** — screens, components, flows, onboarding, settings, empty states, notifications — including requests as small as "add a button" or "fix this UX."
 - **AI-agent experiences** — Horvitz's act / scope down / ask / wait decision at every agent action point; the Microsoft human-AI guidelines that most reduce interface; the anti-patterns (plan viewers by default, feedback buttons on every message, approval gates on reversible edits).
-- **Design reviews** — evidence-based: render and walk the artifact, screenshot the five viewport tiers, stress with long strings and empty data, read the console; run the craft pass over surviving elements; report with a Ship / Ship with fixes / Needs work verdict and findings ranked Blocker / High / Medium / Nit, each as observation → rule broken → fix. No finding without something the walk showed.
+- **Design reviews** — evidence-based: render and walk the artifact when possible, test supported viewports and dynamic content, inspect relevant source and accessibility semantics, and label each finding's evidence source. Reviews report rather than edit unless changes are requested.
 - **Inheriting an existing UI** — detect preserve-vs-overhaul before any design work; the audit becomes ledger round zero; habits are load-bearing; never silently change slugs, nav labels, form field names, tracked IDs, the logo, legal copy, or existing accessibility wins.
-- **Craft and accessibility QA** — contrast, keyboard and focus, touch targets, type resilience, responsive tiers, the confirm-vs-undo rule (confirmation only where undo cannot reach), motion, layout stability.
+- **Craft and accessibility QA** — WCAG requirements, platform guidance, contrast, keyboard and focus, targets, type resilience, responsive behavior, action authority and recovery, motion, and layout stability.
 - **Multi-round work with design agents** — the regression watchlist (decoration creep, banned patterns returning under new names, generator tells, fixture drift), comply-or-argue collaboration, and convergence criteria.
 - **Product classes and domains** — task/decision products get the core at full strength; feeds, learning/games, and persuasion surfaces get a remapped channel map and cost model. Eight domains (money movement, health & safety, public sector, regulated consent, safety-critical operations, children's products, privacy-sensitive surfaces, shared devices) override specific rungs — undo-beats-confirm, infer-from-history, glanceable status — and the table says what applies instead. Domain changes the rung, never the palette.
 
@@ -75,7 +75,7 @@ Element-first: add a Sort dropdown. Interaction-first (rung 4): column headers a
 | [SKILL.md](SKILL.md) | The skill: stance, precedence, workflow (ladder, interaction spec, constraints, channel physics, verb sovereignty, ledger), AI-agent section, deliverable formats, anti-pattern lexicon, pointers to the references |
 | [references/foundations.md](references/foundations.md) | The research canon — Norman, Hutchins/Hollan, Verplank, Raskin, Cooper, Saffer, Nielsen, Bret Victor, Weiser & Brown, Krishna, Herigstad — with sources |
 | [references/design-review-protocol.md](references/design-review-protocol.md) | Render-and-walk practice, the craft pass, inheriting a UI, the regression watchlist, design-system review, comply-or-argue, report format, convergence |
-| [references/craft-baseline.md](references/craft-baseline.md) | Measurable exit criteria (WCAG 2.2 AA, Apple HIG, Material Design) for elements that survived the ledger — judges quality only, can never add an element |
+| [references/craft-baseline.md](references/craft-baseline.md) | WCAG 2.2 AA checks, platform-specific guidance, and recommended defaults kept distinct so preferences are not reported as conformance failures |
 | [references/ai-agent-interaction.md](references/ai-agent-interaction.md) | Horvitz's mixed-initiative principles, the Microsoft human-AI guidelines, Google PAIR, Nielsen's intent-based paradigm — mapped to reducing interface |
 | [references/worked-examples.md](references/worked-examples.md) | Eight request → element-first → interaction-first walkthroughs with rungs and net counts |
 | [references/product-class-overlays.md](references/product-class-overlays.md) | How the channel map and the definition of cost change for feeds, learning/games, and persuasion surfaces; the domain-constraints table (money, health, public sector, regulated consent, safety-critical, children, privacy, shared devices) naming which rung each domain overrides |
@@ -85,9 +85,9 @@ Element-first: add a Sort dropdown. Interaction-first (rung 4): column headers a
 | [CHANGELOG.md](CHANGELOG.md) | Version history |
 | [.claude-plugin/](.claude-plugin/) | Plugin and marketplace manifests for Claude Code installation |
 
-## Pressure-tested
+## Behavioral evaluation status
 
-The load-bearing wording is verified the way code is. For each scenario, a control subagent runs first to document the failure — *without* the skill for core rules, or with the skill *minus the section under test* when that section overrides the skill's own defaults — then an agent that reads the skill runs the same scenario under the same pressure. Current suite:
+The repository includes scenario-based prompt smoke tests. Historical runs suggest that the skill changes model behavior in the intended direction, but most used one repetition, did not retain complete raw artifacts, and included one contaminated control. They are not automated tests or evidence of user outcomes. `tests/scenarios.md` now defines stricter requirements: isolated arms, identical prompts and tool policies, retained raw outputs and environment metadata, multiple repetitions, and disclosed scoring.
 
 | Scenario | Pressure | Control | With skill |
 | --- | --- | --- | --- |
@@ -101,7 +101,7 @@ The load-bearing wording is verified the way code is. For each scenario, a contr
 | Medication dosing "speed-ups" (autofill from last dose, one-tap repeat, drop the confirmation) | Nursing lead + pediatric pilot | Control = skill without the domain table: already correct | Same design, now citing patient-context resets and the shared, family-visible tablet |
 | Mental-health app made "ambient" (mood widget, lock-screen activity, chat dot) | "Calm, glanceable" framing | Control = skill without the domain table: **shipped mood colour and a therapist's name onto onlooker-visible surfaces** | Who-else-can-see-the-screen governs: calendar hand-off under a neutral title, check-in folded into launch, opt-in summoned widget with no mood colour |
 
-All with-skill runs pass, and the whole suite was re-run after SKILL.md was restructured for token cost. Two results are worth knowing: the medication scenario showed the skill's existing rules already handled a high-stakes domain, so the health row of the domain table reinforces rather than rescues; the mental-health scenario showed the opposite — without the privacy row, the skill's own "periphery before center" instinct put health status on onlooker-visible surfaces. Edits to the precedence, craft-scoping, confirm-vs-undo, ledger, redesign, or domain-constraint rules should re-run the suite; see [tests/scenarios.md](tests/scenarios.md) for the prompts and [tests/pressure-log.md](tests/pressure-log.md) for outcomes.
+Treat the table above as a historical summary, not a release claim. Re-run both arms after changes to the skill, model, harness, system instructions, tool policy, scenario, or rubric. See [tests/scenarios.md](tests/scenarios.md) for the current method and [tests/pressure-log.md](tests/pressure-log.md) for the qualified historical record.
 
 ## Installation
 
@@ -118,10 +118,14 @@ claude plugin install interaction-first-design@interaction-first-design
 **Or copy the skill directly** into your skills directory:
 
 ```bash
-cp -R interaction-first-design ~/.claude/skills/interaction-first-design
+git clone https://github.com/tad-agentics/Interaction-Design-Skill.git ~/.claude/skills/interaction-first-design
 ```
 
 Claude invokes it automatically on matching tasks, or explicitly with `/interaction-first-design`.
+
+## License
+
+No license has been granted yet. Until a `LICENSE` file is added, the repository is available for inspection but reuse, modification, and redistribution are not licensed. The repository owner should choose and add the intended license before asking others to adopt or contribute to the skill.
 
 ## Influences
 
