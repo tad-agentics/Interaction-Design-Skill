@@ -46,7 +46,7 @@ Run this as the **craft pass** of a design review (see `design-review-protocol.m
 ## 6. Feedback, reversal & failure (the reconciled confirm/undo rule)
 
 - **Reversible action → act immediately, one-gesture undo, no confirmation.** (Ladder rung 3.)
-- **Confirmation only where undo cannot reach**: irreversible external effects — sending, paying, publishing, destroying others' data. This is the *entire* legitimate territory of confirmation dialogs.
+- **Confirmation only where undo cannot reach**: irreversible external effects — a message sent, a payment executed, content published, data destroyed with no restore path. If soft-delete or versioning can create a restore path, build that instead of the dialog. This is the *entire* legitimate territory of confirmation dialogs.
 - Unsaved-work warnings are a finding, not a fix: autosave removes the problem the dialog guards.
 - Async controls show an in-progress state and are single-fire (no double-submit).
 - Success feedback is peripheral and fades; normalcy is never reported with a dialog (Cooper). Only action-required outcomes move to center.
