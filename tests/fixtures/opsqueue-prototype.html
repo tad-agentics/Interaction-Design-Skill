@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpsQueue — Treasury approvals</title>
+<style>
+  :root { --ink:#1a1d21; --muted:#5c6470; --surface:#fff; --ground:#f6f7f8; --accent:#1d4ed8; --danger:#b91c1c; }
+  body { margin:0; font:14px/1.5 Inter, system-ui, sans-serif; color:var(--ink); background:var(--ground); }
+  header { display:flex; justify-content:space-between; align-items:center; padding:12px 24px; background:var(--surface); border-bottom:1px solid #e5e7eb; }
+  nav a { margin-right:16px; color:var(--muted); text-decoration:none; }
+  nav a::before { content:""; display:inline-block; width:6px; height:6px; border-radius:50%; background:#22c55e; margin-right:6px; }
+  .strip { font:11px/1 ui-monospace, monospace; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+  main { display:grid; grid-template-columns: 1fr 360px; gap:24px; padding:24px; }
+  .eyebrow { font:11px/1 ui-monospace, monospace; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; }
+  .card { background:var(--surface); border:1px solid #e5e7eb; border-radius:8px; padding:16px; margin-bottom:12px; }
+  .card h3 { margin:0 0 4px; font-size:15px; }
+  .meta { color:var(--muted); font-size:13px; }
+  .meta span::before { content:"·"; margin:0 6px; }
+  .meta span:first-child::before { content:""; margin:0; }
+  .row { display:flex; justify-content:space-between; align-items:center; margin-top:12px; }
+  .btn { border:1px solid var(--accent); border-radius:6px; padding:8px 14px; font:inherit; cursor:pointer; background:var(--accent); color:#fff; }
+  .btn.hollow { background:transparent; color:var(--accent); }
+  .btn.danger { background:var(--danger); border-color:var(--danger); }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
+  .dot.green { background:#22c55e; } .dot.amber { background:#f59e0b; } .dot.red { background:#ef4444; }
+  aside .card { position:sticky; top:24px; }
+  .fake-shot { border:1px solid #e5e7eb; border-radius:6px; padding:10px; background:#fafafa; }
+  .fake-shot .bar { height:8px; background:#e5e7eb; border-radius:4px; margin:6px 0; }
+  .fake-shot .bar.short { width:40%; }
+  footer { padding:12px 24px; font:11px ui-monospace, monospace; color:var(--muted); }
+  kbd { font:11px ui-monospace, monospace; border:1px solid #d1d5db; border-radius:4px; padding:1px 5px; background:#fff; }
+</style>
+</head>
+<body>
+<header>
+  <nav>
+    <a href="#">Queue</a><a href="#">Approved</a><a href="#">Rejected</a><a href="#">Settings</a>
+  </nav>
+  <div class="strip">Treasury · Ops · Approvals · v0.6</div>
+</header>
+
+<main>
+  <section>
+    <p class="eyebrow">001 · Pending approvals</p>
+
+    <article class="card" data-id="TX-4471">
+      <h3>Acme Corp — ₫23,400,000</h3>
+      <div class="meta"><span><span class="dot red"></span>Overdue</span><span>Requested by John Doe</span><span>Due 09:00</span><span>Batch 12/48</span></div>
+      <div class="row">
+        <span class="meta">Same-day run</span>
+        <button class="btn" data-action="approve">Approve</button>
+      </div>
+    </article>
+
+    <article class="card" data-id="TX-4472">
+      <h3>Nexus Ltd — ₫8,120,000</h3>
+      <div class="meta"><span><span class="dot amber"></span>Due soon</span><span>Requested by Jane Smith</span><span>Due 14:00</span><span>Batch 13/48</span></div>
+      <div class="row">
+        <span class="meta">Next-day run</span>
+        <button class="btn" data-action="approve">Approve</button>
+      </div>
+    </article>
+
+    <article class="card" data-id="TX-4473">
+      <h3>SmartFlow Inc — ₫1,000,000</h3>
+      <div class="meta"><span><span class="dot green"></span>On track</span><span>Requested by Sarah Chan</span><span>Due tomorrow</span><span>Batch 14/48</span></div>
+      <div class="row">
+        <span class="meta">Next-day run</span>
+        <button class="btn" data-action="approve">Approve</button>
+      </div>
+    </article>
+
+    <p class="meta">Press <kbd>A</kbd> to approve the highlighted item. Press <kbd>1</kbd>–<kbd>3</kbd> to approve by position.</p>
+  </section>
+
+  <aside>
+    <div class="card">
+      <p class="eyebrow">002 · Detail</p>
+      <h3>TX-4471 · Acme Corp</h3>
+      <div class="fake-shot" aria-label="invoice preview">
+        <div class="bar"></div><div class="bar short"></div><div class="bar"></div>
+      </div>
+      <p class="meta">Success rate 99.99% · 1234567 processed</p>
+      <div class="row">
+        <button class="btn hollow" data-action="approve-detail">Confirm approval</button>
+        <button class="btn danger" data-action="reject">Reject</button>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<footer>Build 0048 · last sync 4s ago · main</footer>
+
+<script>
+  // Prototype behaviour: approving from the list commits immediately; from the detail panel it opens a confirm().
+  document.querySelectorAll('[data-action="approve"]').forEach(b => b.addEventListener('click', e => {
+    e.target.closest('article').style.opacity = .4; e.target.textContent = 'Approved';
+  }));
+  document.querySelector('[data-action="approve-detail"]').addEventListener('click', () => {
+    if (confirm('Approve TX-4471 for ₫23,400,000?')) alert('Approved');
+  });
+  document.addEventListener('keydown', e => {
+    const cards = [...document.querySelectorAll('article')];
+    if (e.key === 'a') cards[0].querySelector('button').click();
+    if (['1','2','3'].includes(e.key)) cards[+e.key - 1].querySelector('button').click();
+  });
+</script>
+</body>
+</html>

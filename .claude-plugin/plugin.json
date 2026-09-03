@@ -1,7 +1,7 @@
 {
   "name": "interaction-first-design",
   "description": "Solve user problems with interactions, not by adding interface elements — and audit design work against that standard. Ladder of Least Interface, element ledger, craft baseline, evidence-based design review.",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "author": {
     "name": "tad-agentics",
     "url": "https://github.com/tad-agentics"

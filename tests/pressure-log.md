@@ -30,7 +30,21 @@ Subagent scenario tests of the skill's wording (RED = baseline agent without the
 - RED: executed everything, and patched each risk with a new element — an "expert mode" toggle (a mode), tooltips on nav showing old names, an in-app tour, "moved" notices, redirects.
 - GREEN (1 rep): accepted *overhaul* as the decided mode; ledger round-zero census first; renames treated as approved-and-logged with 301s and habit carry-over (never-silently means logged, not refused); field names and focus outlines protected; wizard handled by comply-or-argue — build spec'd and recommended versions side by side, wizard costed at +5 on the ledger, "deviating without telling you would be a failed round; so would complying without telling you." No toggle, tooltips, or tour. **Pass; converged with S5 — no wording added.**
 
+## 2026-09-03 — SKILL.md restructure (worked examples and product-class scope moved to references; description rewritten as triggers-only) + new coverage
+
+Full with-skill re-run of S1–S5b against the restructured SKILL.md (4,623 → 4,137 words; anti-pattern lexicon kept inline because S5's pass had quoted it). **All pass, all converge with prior runs**; S1 and S3 came back slightly stronger (S1 added a census, a decision-for-the-human, and a fix block; S3 now writes goal-and-gulf before the channel map). S4 verified on disk again.
+
+**S6 — AI agent trust bundle** (approval modal + confidence badge + thumbs + always-open why panel; sprint pressure).
+- RED: weak control — rejected the bundle on its own; proposed announce-before-acting, pending diffs, scope rules, hover explanation. Minor additive leaks (per-action announce line, a scope setting).
+- GREEN (1 rep): named the execution gulf behind the evaluation symptom; rungs 1–2 targeting; G10 scope-down with one candidate chip as the only question; rung-3 undo; hollow/filled verb state carries confidence instead of a percentage; G11 available-not-displayed; G1–G2 once at first use; G15 feedback-is-correction; ledger +1 with exit criterion. **Pass.**
+
+**S7 — Rendered prototype review** (`fixtures/opsqueue-prototype.html`).
+- RED: **contaminated** — the tools-allowed baseline auto-loaded the installed copy of this skill and produced a skill-shaped review (gulfs, rung 3, reasoned verbs, ledger −11). Not a control; recorded as a method finding. It did not declare render status, consistent with having loaded the older installed version that lacks the no-finding-without-evidence rule.
+- GREEN (1 rep): **first real exercise of render-and-walk** — opened the prototype, walked 1440 and 375, pressed `2` with nothing focused and observed TX-4472 commit (opacity change), screenshotted the 375 overflow, marked Reject as heuristic (no handler). Blockers: wrong-commit path (positional keys, focus-blind `A`), irreversible transfer with no receipt/failure state reconciled correctly with craft §6, same verb two behaviours, 375 overflow. High: Reject as reasoned verb, 44pt targets, 12px floor. Generator tells enumerated as undeclared elements; net 31 → 15; decision-for-the-human on approve-after-viewing. **Pass.**
+
 ## Method notes
+
+- Baselines must forbid tools; where this skill is installed, a tools-allowed baseline auto-loads it (S7).
 
 - Independent confirmation from the field: the taste-skill project reports that agents "historically ignored em-dash limits when phrased as 'use sparingly'" and only complied when the rule became binary. Same finding as this suite — soft quantifiers don't bind; observable predicates and countable caps do.
 

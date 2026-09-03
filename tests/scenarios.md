@@ -86,8 +86,34 @@ Scoring: a with-skill run **passes** when it shows the expected shape and adds n
 
 **Expected shape:** accepts overhaul as the decided mode; ledger round-zero census first; renames treated as approved-and-logged with redirects and habit carry-over (never-silently means logged, not refused); field names and focus outlines protected; wizard handled by comply-or-argue — both versions built side by side, wizard costed on the ledger; no expert-mode toggle, tooltips, or tour.
 
+## S6 — AI agent trust bundle
+
+*Files:* SKILL.md, references/ai-agent-interaction.md
+*Pressure:* PM bundle of four hedging elements + sprint deadline. Note: a weak control — the baseline already rejects most of the bundle; the with-skill difference shows in the Horvitz framing, expectation setting, and verb-state-as-confidence.
+
+> You are the product designer for an AI coding assistant embedded in an IDE. Support tickets say it "sometimes edits the wrong file" and users "don't trust it." The PM's proposal: (1) an approval modal before every file edit showing the diff with Approve / Reject, (2) a confidence-percentage badge on every suggestion, (3) thumbs up / thumbs down on every response, (4) a "Why did you do this?" explanation panel always open in the sidebar. The PM wants trust fixed this sprint.
+>
+> Do not read any files or use any tools. Design the solution and describe what you would ship, under 350 words.
+
+**Expected shape:** names the execution gulf (targeting) behind the evaluation symptom; fixes targeting at rungs 1–2; scopes down (G10) with one inline candidate chip as the only question; acts with one-step undo (rung 3); pending/filled verb state carries confidence, no percentage; explanation available on request (G11), expectations set once at first use (G1–G2); feedback is the correction (G15); ledger with exit criteria.
+
+## S7 — Rendered prototype review (object–verb sovereignty, generator tells, real walk)
+
+*Files:* SKILL.md, references/design-review-protocol.md, references/craft-baseline.md
+*Fixture:* `fixtures/opsqueue-prototype.html` — position-bound approval keys, a document-global `A` key, a filled list `Approve` that commits instantly beside a hollow detail `Confirm approval` that opens `confirm()`, a filled one-gesture `Reject` with no reason, a fixed-width aside that overflows at 375, and a full set of generator tells (nav dots, status dots, `001 ·` eyebrows, middle-dot strips, div-built fake invoice, placeholder names and vanity numbers, `Build 0048` footer).
+*Baseline caveat:* this scenario requires tools to render, and an installed copy of this skill will auto-trigger on "design review" in any environment where it is enabled — so a tools-allowed baseline is not a clean control there. Run the baseline only where the skill is not installed.
+
+> You are a senior product design reviewer. Review the prototype at `<repo>/tests/fixtures/opsqueue-prototype.html` — it is the OpsQueue treasury approvals screen, where operators approve payment transfers to vendors (an approval is an irreversible external money transfer). You may read the file and, if you have browser tools available, render it and interact with it. Deliver the review, under 450 words.
+
+**Expected shape:** states which tiers and flows were walked and marks anything unwalked as heuristic; **Blockers**: position-bound keys and the focus-blind `A` (wrong-commit path, Step 4.6), the irreversible transfer with no receipt/failure state (craft §6 — this is the legitimate territory of confirmation, so the fix is a receipt that waits, not a bare one-click commit), the same verb with two behaviours, the 375 overflow; **High**: Reject as a reasoned verb (hollow until a reason is typed), targets and type floors; generator tells listed as undeclared elements with a net count; a decision for the human on approve-from-list vs approve-after-viewing.
+
 ---
+
+## Method notes
+
+- **Baselines must say "do not read any files or use any tools."** Where this skill is installed, any tools-allowed baseline that mentions a design review will auto-load it and stop being a control (observed on the first S7 run).
+- Baseline arms are stable across skill edits; re-run only the with-skill arms after a change, unless the scenario prompt itself changed.
 
 ## Not yet covered
 
-The AI-agent section (act / scope down / ask / wait), object–verb sovereignty, generator tells, product-class overlays, and the render-and-walk / viewport-tier wording against a real rendered page. Add scenarios here before editing those sections.
+Product-class overlays (feed/social, learning/games, persuasion surfaces) and the design-system-document review (protocol §5). Most scenarios have one rep per arm; S3 has three. Add scenarios here before editing those sections.

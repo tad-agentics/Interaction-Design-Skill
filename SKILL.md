@@ -1,6 +1,6 @@
 ---
 name: interaction-first-design
-description: Solve user problems with interactions, not by adding interface elements — and audit design work against that standard. Use whenever creating, modifying, redesigning, reviewing, or prototyping any UI, screen, component, flow, onboarding, settings page, empty state, notification, or AI-agent experience, and for craft QA — accessibility/WCAG, contrast, touch targets, keyboard, responsive layout, typography, motion. Trigger even when the user only says "add a button/toggle/badge/modal/tooltip", "fix this UX", "users are confused", or asks for a mockup. Always trigger for DESIGN REVIEWS of screens, prototypes, or design systems (including output from design agents like Claude Design), for defining visual state systems (colour/glow/motion/urgency), for element ledgers across design rounds, and when an AI agent acts on the user's behalf. Grounded in Norman, Raskin, Cooper, Saffer, Bret Victor, Weiser & Brown, Horvitz, and the Microsoft/Google human-AI guidelines.
+description: Use when creating, modifying, redesigning, reviewing, or prototyping any UI — screens, components, flows, onboarding, settings, empty states, notifications, dashboards, forms, design systems — in Claude Code, Cursor, Claude Design, or any frontend task. Use even when the request is as small as "add a button/toggle/badge/modal/tooltip", "fix this UX", "users are confused", "make it feel modern", or "give me a mockup". Use for every DESIGN REVIEW of a screen, prototype, or design system (including output from design agents), for craft and accessibility QA (WCAG, contrast, touch targets, keyboard, responsive layout, typography, motion), for visual state systems (colour/glow/motion/urgency), for element ledgers across design rounds, for redesigns of products people already use, and whenever an AI agent acts on the user's behalf (approvals, confidence, feedback, clarifying questions).
 ---
 
 # Interaction-first design
@@ -200,31 +200,9 @@ When asked to review a UI, screen, or flow:
 
 Open with a one-line verdict (ship / ship with fixes / needs work), rank findings by severity, and back each with observed evidence — the full report format, evidence rules, and regression watchlist are in `references/design-review-protocol.md`. Lead with the biggest removal, not the longest list.
 
-## Worked examples (request → element-first response → interaction-first response)
+## Worked examples
 
-**"Users can't find how to sort the table."**
-Element-first: add a Sort dropdown above the table.
-Interaction-first (rung 4): column headers are the sort control; click toggles asc/desc, a subtle chevron is the feedback. Rung 2 on top: remember last sort per user. Elements added: none. Removed: the dropdown you would have built.
-
-**"Users lose work — add an unsaved-changes warning."**
-Element-first: badge + beforeunload dialog.
-Interaction-first (rung 3): autosave on every change; peripheral "saved" tick that fades; version history reachable on request (rung 5). Elements added: one peripheral indicator. Removed: dialog, badge, Save button.
-
-**"The AI sometimes picks the wrong file — add an approval step."**
-Element-first: modal listing the file with Approve/Reject.
-Interaction-first (rung 3 + G10): if confidence is high, act and show a one-line inline note with undo; if low, open the file picker pre-filtered to the top candidates with the best one focused — the user's confirming action is the selection itself. Elements added: none persistent. Removed: modal.
-
-**"New users don't know what to do on the empty dashboard — add three CTA cards and a tour."**
-Element-first: cards + coach marks.
-Interaction-first (rung 1–2): populate the dashboard with the user's own data from signup context (company, imported items, sample derived from their domain); the first real action is available on the first real object. If nothing can be inferred, one CTA, not three. Elements added: one. Removed: tour, two cards.
-
-**"Users miss important notifications — make the badge red and bigger."**
-Element-first: bigger badge, toast, sound.
-Interaction-first (calm): distinguish by foghorn test. Only action-required events move to center (inline, at the object needing action). Everything else is a peripheral count that the user pulls. Elements added: none. Changed: routing of existing signal.
-
-**"Add a settings page so users can configure the agent."**
-Element-first: settings page with 12 toggles.
-Interaction-first (Amershi G17 + rung 2): the agent learns from corrections (G13); global controls reduce to on/off and scope (what it may touch). Preferences the user never changes are excise. Elements added: two controls. Removed: ten.
+Eight request → element-first → interaction-first walkthroughs (sort, unsaved work, AI file choice, empty dashboard, notifications, agent settings, delete confirmation, brand restyle) with rungs and net counts are in `references/worked-examples.md`. Read it to calibrate a ladder decision or a review against a known-good answer.
 
 ## Anti-pattern lexicon
 
@@ -243,14 +221,7 @@ Interaction-first (Amershi G17 + rung 2): the agent learns from corrections (G13
 
 ## Scope by product type
 
-The ladder, gulfs, channels-as-meaning, ledger, motion grammar, and review protocol are universal. Two things vary by product class — the channel *map* (what position, heat, glow encode here) and the definition of *cost*:
-
-- **Task / decision products** (ops, fintech, admin SaaS, productivity, e-commerce checkout): full strength, as written. Interaction is cost; the concrete channel assignments in Step 4.5 and all of Step 4.6 apply.
-- **Consumption / social products** (feeds, media, community): the meta-rules hold; the concrete assignments don't. There is no commit, heat has no SLA, one-glow-per-screen is meaningless on a feed. Re-derive the channel map from the product's actual meanings before applying 4.5, and skip 4.6. Attention is the revenue here, so the ethics of "reduce interaction cost" changes sign — reducing friction toward compulsive consumption is not a win; the ledger should count engagement mechanics the way it counts elements.
-- **Learning, games, fitness** (anywhere effort is the product): split the surface. Chrome around the core loop (navigation, enrollment, resume, finding the next thing) gets full strength — most of these products fail exactly there. Inside the core loop the central bet inverts: effortful interaction IS the product (desirable difficulties — retrieval beats re-reading because it is harder), so never infer away or smooth the struggle. Friction there is deliberate, budgeted like an element, and measured in retention or mastery, not clicks.
-- **Persuasion artifacts** (landing/marketing pages): mostly out of scope for the interaction rules; Hick's law on calls-to-action is about all that transfers. This is the same boundary the Precedence section draws for conversion surfaces — the style layer may optimize first impressions there, and only there.
-
-Extend by overlay, not by generalizing the core: when a new product class enters real design rounds, write a ~60-line overlay (channel remap + cost redefinition + class-specific regression items), hardened against that product's reviews. An overlay fighting the core is a separate skill.
+The ladder, gulfs, ledger, motion grammar, and review protocol are universal; the channel *map* and the definition of *cost* vary by product class. Task/decision products get full strength as written. If the product is a feed or social surface, a learning/game/fitness loop, or a marketing page, read `references/product-class-overlays.md` before applying Step 4.5 or 4.6 — it remaps the channels, redefines cost, and says what is out of scope.
 
 ## References
 
@@ -260,3 +231,5 @@ Read these when you need the underlying argument, the full guideline sets, or ci
 - `references/ai-agent-interaction.md` — Horvitz's 12 mixed-initiative principles, Microsoft's 18 Human-AI Interaction guidelines (titles with one-line glosses), Google PAIR guidebook structure, Nielsen's intent-based paradigm, and how each maps to reducing interface. With source links.
 - `references/design-review-protocol.md` — how to review design work (your own or a design agent's) across rounds: render-and-walk practice, viewport tiers, the craft pass, inheriting an existing UI (redesign mode, audit as ledger round zero, what never changes silently), the regression watchlist, self-limiting system rules, comply-or-argue collaboration, and the severity-ranked review output format. Read it whenever auditing screens, prototypes, or a design system.
 - `references/craft-baseline.md` — measurable exit criteria (WCAG 2.2 AA, Apple HIG, Material Design numbers) for elements that survived the ledger: contrast, keyboard and focus, touch targets, type resilience, responsive tiers, the confirm-vs-undo rule, motion, layout stability, charts. Read it for any craft/accessibility QA pass or before calling UI work delivery-ready. It judges quality only — it can never add an element.
+- `references/worked-examples.md` — eight request → element-first → interaction-first walkthroughs with rungs and net element counts.
+- `references/product-class-overlays.md` — how the channel map and the definition of cost change for consumption/social products, learning/games/fitness, and persuasion surfaces; the overlay rule for new product classes.

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0 — 2026-09-03
+
+- SKILL.md trimmed for per-invocation cost (4,623 → 4,137 words): worked examples moved to `references/worked-examples.md` (now eight, including two from the pressure suite); scope-by-product-type moved to `references/product-class-overlays.md`. The anti-pattern lexicon stays inline.
+- Description rewritten as triggers-only ("Use when…"), no stance or workflow summary, with redesign, dashboard, form, and AI-agent triggers added.
+- New scenarios S6 (AI-agent trust bundle) and S7 (rendered prototype review) with the `tests/fixtures/opsqueue-prototype.html` fixture; full with-skill suite re-run after the restructure, all pass.
+- Method finding recorded: baselines must forbid tools, or an installed copy of the skill auto-loads and contaminates the control.
+
 ## 0.3.1 — 2026-09-03
 
 - Tests are re-runnable from the repo: `tests/scenarios.md` carries the verbatim prompts and expected shapes for every scenario, `tests/fixtures/ledger-opsqueue.md` the S4 fixture.
